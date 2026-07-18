@@ -1,0 +1,872 @@
+<html>
+<head>
+<title>Federal Register, Volume 91 Issue 129 (Wednesday, July 8, 2026)</title>
+</head>
+<body><pre>
+[Federal Register Volume 91, Number 129 (Wednesday, July 8, 2026)]
+[Proposed Rules]
+[Pages 42158-42165]
+From the Federal Register Online via the Government Publishing Office [<a href="http://www.gpo.gov">www.gpo.gov</a>]
+[FR Doc No: 2026-13808]
+
+
+=======================================================================
+-----------------------------------------------------------------------
+
+DEPARTMENT OF COMMERCE
+
+National Oceanic and Atmospheric Administration
+
+50 CFR Part 622
+
+[Docket No. 260706-0162]
+RIN 0648-BN67
+
+
+Fisheries of the Caribbean, Gulf of America, and South Atlantic; 
+Puerto Rico Fishery Management Plan; Amendment 4
+
+AGENCY: National Marine Fisheries Service (NMFS), National Oceanic and 
+Atmospheric Administration (NOAA), Commerce.
+
+ACTION: Proposed rule; request for comments.
+
+-----------------------------------------------------------------------
+
+SUMMARY: NMFS proposes regulations to implement Amendment 4 to the 
+Puerto Rico Fishery Management Plan (Puerto Rico FMP), as prepared and 
+submitted by the Caribbean Fishery Management Council (Council). The 
+proposed rule would reclassify rainbow runner from a reef fish to a 
+pelagic fish under the Puerto Rico FMP. The proposed rule would 
+implement management measures for rainbow runner based on the pelagic 
+fish classification, including sector annual catch targets (ACTs) and 
+accountability measures (AMs). The sector-specific annual catch limits 
+(ACLs) would be retained after the reclassification. The purpose of 
+this proposed rule and Amendment 4 is to ensure that rainbow runner is 
+managed consistent with its life history characteristics, fishing 
+patterns, and with the Council's management of other pelagic species.
+
+DATES: Written comments must be received by August 7, 2026.
+
+ADDRESSES: A plain language summary of this proposed rule is available 
+at <a href="https://www.regulations.gov/docket/NOAA-NMFS-2025-0471">https://www.regulations.gov/docket/NOAA-NMFS-2025-0471</a>. You may 
+submit comments on the proposed rule, identified by ``NOAA-NMFS-2025-
+0471,'' by either of the following methods:
+    <bullet> Electronic Submission: Submit all electronic public 
+comments via the Federal e-Rulemaking Portal. Visit <a href="https://www.regulations.gov">https://www.regulations.gov</a> and enter ``NOAA-NMFS-2025-0471'' in the Search 
+box. Click on the ``Comment'' icon, complete the required fields, and 
+enter or attach your comments.
+    <bullet> Mail: Submit all written comments to Maria Lopez-Mercer, 
+Southeast Regional Office, NMFS, 263 13th Avenue South, St. Petersburg, 
+FL 33701.
+    Instructions: Comments sent by any other method, to any other 
+address or individual, or received after the end of the comment period, 
+may not be considered by NMFS. All comments received are a part of the 
+public record and will generally be posted for public viewing on 
+<a href="https://www.regulations.gov">https://www.regulations.gov</a> without change. All personal identifying 
+information (e.g., name, address), confidential business information, 
+or otherwise sensitive information submitted voluntarily by the sender 
+will be publicly accessible. NMFS will accept anonymous comments (enter 
+``N/A'' in the required fields if you wish to remain anonymous).
+    Electronic copies of Amendment 4, which includes a fishery impact 
+statement, a regulatory impact review, and a Regulatory Flexibility Act 
+(RFA) analysis, may be obtained from the Southeast Regional Office 
+website at <a href="https://www.fisheries.noaa.gov/action/amendment-4-puerto-rico-fishery-management-plan-reclassification-rainbow-runner-pelagic-fish">https://www.fisheries.noaa.gov/action/amendment-4-puerto-rico-fishery-management-plan-reclassification-rainbow-runner-pelagic-fish</a>.
+
+FOR FURTHER INFORMATION CONTACT: Maria Lopez-Mercer, 727-824-5305, 
+<a href="/cdn-cgi/l/email-protection#204d415249410e4c4f50455a604e4f41410e474f56"><span class="__cf_email__" data-cfemail="3954584b5058175556495c437957565858175e564f">[email&#160;protected]</span></a>.
+
+SUPPLEMENTARY INFORMATION: Rainbow runner is currently managed under 
+the Puerto Rico FMP as a reef fish. The FMP was prepared by the Council 
+and NMFS, approved by the Secretary of Commerce, and implemented by 
+NMFS through regulations at 50 CFR part 622 under the authority of the 
+Magnuson-Stevens Fishery Conservation and Management Act (Magnuson-
+Stevens Act).
+
+Background
+
+    The Magnuson-Stevens Act requires that NMFS and the regional 
+fishery management councils prevent overfishing and achieve, on a 
+continuing basis, the optimum yield from federally managed fish stocks 
+to ensure that fishery resources are managed for the greatest overall 
+benefit to the Nation, particularly with respect to providing food 
+production and recreational opportunities and protecting marine 
+ecosystems.
+    This action is proposed under the statutory authority of the 
+Magnuson-Stevens Act section 303(a)(1) as necessary and appropriate for 
+the conservation and management of the fishery to prevent overfishing 
+and to promote the long-term health and stability of the fishery.
+    During development of the Puerto Rico FMP, the finfish stocks were 
+classified into three descriptive categories: reef fish, pelagic fish, 
+and rays. At that time, the rainbow runner and two other jack species 
+that were new to Federal management under the Puerto Rico FMP (crevalle 
+jack and African pompano) were classified as reef fish. Under the 
+Puerto Rico FMP, each jack species is managed as an individual stock 
+rather than in a stock complex because of differences in the primary 
+location where they are caught. As described in the Puerto Rico FMP, 
+rainbow runner is commonly caught in open water, while crevalle jack is 
+commonly harvested closer to shore and around mangrove channels, and 
+African pompano is commonly caught off the beach. With the 
+implementation of the Puerto Rico FMP in October 2022, rainbow runner 
+became subject to management measures applicable to reef fish in 
+Federal waters around Puerto Rico. Federal waters around Puerto Rico 
+extend seaward from 9 nautical miles (nmi) or 16.7 kilometers (km) from 
+shore to the offshore boundary of the U.S. Caribbean exclusive economic 
+zone (EEZ).
+    Under the Puerto Rico FMP, regulations that apply to all reef fish, 
+including rainbow runner as currently classified, include anchoring 
+restrictions, prohibited fishing gear types, seasonal closures, and a 
+combined recreational bag and possession limit. Also, as a reef fish 
+species, rainbow runner is subject to commercial and recreational ACLs, 
+a total ACL, and sector-specific AMs.
+    Unless otherwise noted, all weights in this proposed rule are 
+described in pounds (lb) round weight. Under the Puerto Rico FMP, 
+commercial and recreational data were available to
+
+[[Page 42159]]
+
+establish sector-specific ACLs for rainbow runner, which were equal to 
+10.14 percent for commercial and 89.86 percent for recreational of the 
+total ACL. For rainbow runner, the commercial ACL is 913 lb (414.1 kg), 
+the recreational ACL is 8,091 lb (3,670 kg), and the total ACL is 9,004 
+lb (4,084.1 kg).
+    Under the Puerto Rico FMP, at or near the beginning of the fishing 
+year landings for each stock, stock complex, or indicator stock of reef 
+fish are evaluated relative to the ACL based on a moving multi-year 
+average of landings, as described in the FMP (50 CFR 622.440(a)(4)). 
+When landings for one sector are not available for comparison to that 
+sector's ACL, the ACL for the sector with available landings is the 
+applicable ACL for the stock or stock complex. At this time, 
+recreational landings for rainbow runner are not available; therefore, 
+commercial landings are evaluated relative to the commercial ACL to 
+determine if the AM specified in 50 CFR 622.440(a)(7) applies. If NMFS 
+estimates that available commercial landings for rainbow runner have 
+exceeded the commercial ACL, the Assistant Administrator for NMFS will 
+file a notification with the Office of the Federal Register to reduce 
+the length of the commercial and recreational fishing seasons for 
+rainbow runner within that fishing year by the amount necessary to 
+prevent commercial landings from exceeding the commercial ACL, unless 
+NMFS determines that a reduction is not necessary based on the best 
+scientific information available, or unless the ACL was exceeded 
+because data collection or monitoring improved rather than because 
+landings increased (50 CFR 622.440(a)(7)).
+    The status of the Puerto Rico rainbow runner stock has not been 
+assessed. Since implementation of the Puerto Rico FMP in 2022, rainbow 
+runner is not undergoing overfishing and its overfished status is 
+unknown. As described in Amendment 4, no AM-based fishing season 
+reductions for rainbow runner have been applied. In 2024, the most 
+recent commercial landings of rainbow runner (1,177 lb (534 kg) in 
+2022) exceeded the commercial ACL (913 lb (414.1 kg)) by 264 lb (120 
+kg). However, the AM was not implemented (i.e., the lengths of the 
+commercial and recreational fishing seasons were not reduced) because 
+NMFS determined that the commercial ACL was exceeded because of 
+improved data collection and monitoring, rather than an increase in 
+landings.
+    At the April 2023 Council meeting, the Council began to discuss 
+reclassifying rainbow runner as a pelagic fish under the Puerto Rico 
+FMP instead of as a reef fish to better reflect the way the species is 
+fished. Methods and techniques used to harvest rainbow runner are 
+consistent with those used for pelagic fishing in Federal waters around 
+Puerto Rico. Around Puerto Rico, rainbow runner are caught in the water 
+column, while reef fish are usually caught off the bottom. The Council 
+requested its Scientific and Statistical Committee (SSC) to evaluate 
+life history information and landings data available for rainbow runner 
+and provide a recommendation on the classification of rainbow runner. 
+The SSC determined that there was sufficient information to support the 
+reclassification of the species as a pelagic fish and recommended that 
+the Council reclassify rainbow runner as a pelagic fish under the 
+Puerto Rico FMP. At the August 2023 Council meeting, the Council 
+accepted the SSC's recommendation and began developing Amendment 4.
+
+Management Measures Contained in This Proposed Rule
+
+    This proposed rule would reclassify rainbow runner from a reef fish 
+to a pelagic fish under the Puerto Rico FMP definitions. The 
+reclassification would subject rainbow runner to Federal regulations 
+under the FMP applicable to pelagic fish and exclude the species from 
+Federal regulations applicable to reef fish. The current sector ACLs 
+would not change as a result of the reclassification. This proposed 
+rule would also establish sector ACTs and subject rainbow runner to AMs 
+consistent with management of pelagic fish.
+
+Reclassification of Rainbow Runner as a Pelagic Fish
+
+    Rainbow runner is currently defined as a reef fish species under 
+the Puerto Rico FMP (50 CFR 622.431). As such, regulations that pertain 
+to managed reef fish apply to rainbow runner. Reef fish-specific 
+regulations include anchoring restrictions, prohibited fishing gear 
+types, seasonal closures, a combined recreational bag and possession 
+limit, a total ACL (i.e., combined commercial and recreational ACLs), 
+and sector-specific AMs. This proposed rule would remove rainbow runner 
+from the definition of ``reef fish'' in table 3 to 50 CFR 622.431 and 
+add it to the definition of ``pelagic fish'' in table 1 to 50 CFR 
+622.431.
+    As a result of the changes to the definitions, reef fish-specific 
+regulations under the FMP would no longer apply to rainbow runner. 
+Specifically, restrictions designed to protect reef fish populations, 
+including a recreational bag and possession limit (50 CFR 
+622.444(a)(2)) and a seasonal closure in the Bajo de Sico area off 
+western Puerto Rico (50 CFR 622.439(a)(3)), would not apply to rainbow 
+runner as a pelagic fish.
+    As described in Amendment 4, rainbow runner behaves as a pelagic 
+species and has been historically targeted by Puerto Rico commercial 
+and recreational fishermen consistent with other pelagic species, 
+although catches are infrequent and variable. Reclassifying rainbow 
+runner as a pelagic fish is not expected to change how the species is 
+currently fished in Federal waters around Puerto Rico or increase the 
+risk of overfishing of the stock. Under the Puerto Rico FMP, crevalle 
+jack and African pompano would continue to be classified and managed as 
+reef fish, which is consistent with their life history characteristics 
+and fishing patterns in Federal waters around Puerto Rico.
+
+ACLs and ACTs
+
+    Reclassifying rainbow runner from a reef fish to a pelagic fish 
+under the Puerto Rico FMP would not change the commercial ACL (913 lb 
+(414 kg)) or the recreational ACL (8,091 lb (3,670 kg)). Rather, the 
+reclassification would remove rainbow runner commercial, recreational, 
+and total ACLs from the tables for reef fish under 50 CFR 622.440(a) 
+and add the commercial and recreational ACLs to 50 CFR 622.440(b) for 
+pelagic fish. The sector allocations of 10.14 percent commercial and 
+89.86 percent recreational that were established under the Puerto Rico 
+FMP would remain unchanged. Because AMs for pelagic fish do not 
+evaluate landings relative to total ACLs (i.e., combined commercial and 
+recreational ACLs), the total ACL value of 9,004 lb (4,084.1 kg) for 
+rainbow runner would be removed from regulations.
+    Additionally, the reclassification as a pelagic fish would require 
+the establishment of sector-specific ACTs as part of the AMs applicable 
+to pelagic fish. Consistent with management of the other pelagic fish 
+under the Puerto Rico FMP, the sector ACTs would be set at 90 percent 
+of their respective sector ACLs.
+    Managing pelagic species with sector ACTs and ACLs is intended to 
+serve as a precautionary measure to address harvest uncertainty for 
+pelagic species that are new to Federal management. This proposed rule 
+would set the commercial ACT of rainbow runner at 822 lb (373 kg) and 
+the recreational ACT at 7,282 lb (3,303 kg).
+
+[[Page 42160]]
+
+AMs
+
+    This proposed rule would also change the AM applicable to rainbow 
+runner from the AMs described in 50 CFR 622.440(a)(4) through (7) for 
+reef fish and apply the pelagic fish AM described in 50 CFR 
+622.440(b)(7). Under the pelagic fish AM, if NMFS estimates that 
+landings have exceeded the applicable ACT for a stock or stock complex, 
+NMFS will determine the appropriate corrective action in consultation 
+with the Council. Unlike a fixed seasonal closure, these measures are 
+adaptive and could involve the future development and implementation of 
+new management measures, such as seasonal or area closures, commercial 
+trip limits, or recreational bag and possession limits.
+    By applying the pelagic AM to rainbow runner, the corrective action 
+includes a consultation process to ensure the long-term sustainability 
+of the resource, rather than an automatic season reduction.
+
+Classification
+
+    Pursuant to section 304(b)(1)(A) of the Magnuson-Stevens Act, the 
+NMFS Assistant Administrator has determined that this proposed rule is 
+consistent with Amendment 4, the FMP, other provisions of the Magnuson-
+Stevens Act, and other applicable law, subject to further consideration 
+after public comment.
+    This proposed rule has been determined to be not significant for 
+purposes of Executive Order 12866. This proposed rule is not an 
+Executive Order 14192 regulatory action because this rule is not 
+significant under Executive Order 12866.
+    The Magnuson-Stevens Act provides the statutory basis for this 
+proposed rule. No duplicative, overlapping, or conflicting Federal 
+rules have been identified. In addition, no new reporting, record-
+keeping, or other compliance requirements are introduced by this 
+proposed rule. This proposed rule contains no information collection 
+requirements under the Paperwork Reduction Act of 1995.
+    The Senior Lead Counsel for Regulation of the Department of 
+Commerce certified to the Chief Counsel for Advocacy of the Small 
+Business Administration that this proposed rule, if adopted, would not 
+have a significant economic impact on a substantial number of small 
+entities. The factual basis for this certification follows. A copy of 
+the full analysis is available from NMFS (see ADDRESSES). All monetary 
+estimates in the following analysis are in 2022 dollars.
+    A description of this proposed rule, why it is being considered, 
+and the objectives of this proposed rule are contained in the SUMMARY 
+and SUPPLEMENTARY INFORMATION sections of this proposed rule.
+    This proposed rule would reclassify rainbow runner from a reef fish 
+to a pelagic fish under the Puerto Rico FMP, which would remove the 
+species from Federal regulations applicable to reef fish, retain the 
+current sector ACLs under pelagic fish, establish sector ACTs, and 
+apply pelagic fish AMs consistent with management of pelagic fish.
+    For rainbow runner, the current commercial ACL of 913 lb (414.1 kg) 
+and the current recreational ACL of 8,091 lb (3,670 kg) would not 
+change after being classified as a pelagic fish species. The 
+reclassification of rainbow runner from a reef fish to a pelagic fish 
+under the FMP would require that sector-specific ACTs be established as 
+part of the AM applicable to pelagic fish. This proposed rule would 
+establish a commercial ACT of 822 lb (373 kg) and a recreational ACT of 
+7,282 lb (3,303 kg) for rainbow runner.
+    This proposed rule would also implement AMs consistent with 
+management of pelagic fish, such that if NMFS estimates that landings 
+have exceeded the applicable ACT for a stock or stock complex, NMFS 
+will determine appropriate corrective action in consultation with the 
+Council. Under the current reef fish AMs, if NMFS estimates that 
+landings for rainbow runner exceeded the applicable ACL for the stock 
+(i.e., the commercial ACL), NMFS will reduce the length of the fishing 
+season for rainbow runner within the fishing year by the amount 
+necessary to prevent landings from exceeding the ACL. However, no 
+reduction in the fishing season is required if NMFS determines that a 
+reduction is not necessary based on the best scientific information 
+available or if the ACL was exceeded because data collection or 
+monitoring improved rather than because landings increased.
+    This proposed rule would apply to all commercial fishing 
+businesses, charter vessel and headboat (for-hire) fishing businesses, 
+and recreational fishers (anglers) that fish for rainbow runner in the 
+EEZ around Puerto Rico.
+    The RFA requires NMFS to describe the impact of the proposed rule 
+on small entities (5 U.S.C. 603). Small entities include small 
+businesses, small organizations, and small governmental jurisdictions 
+(5 U.S.C. 601(3)-(6)). Recreational anglers are not businesses, 
+organizations, or governmental jurisdictions, so they are outside the 
+scope of this analysis.
+    Although this proposed rule would apply to for-hire vessels, it 
+would not be expected to have any direct effects on these entities. 
+For-hire fishing businesses sell services to anglers and any change in 
+demand for their fishing services as a result of this action would be 
+dependent upon changes in anglers' behavior. Therefore, any impact on 
+for-hire fishing businesses would be an indirect effect of this 
+proposed rule and would fall outside the scope of the RFA. In summary, 
+only the impacts on commercial fishing businesses are discussed here.
+    Estimates of the number of small commercial fishing businesses that 
+are directly affected by this proposed rule are based on the number of 
+commercial fishermen who report their landings. Any business that 
+operates a commercial fishing vessel that lands fish in Puerto Rico 
+must be licensed to do so by the territorial government. Each licensed 
+fisherman represents a unique commercial fishing business. The process 
+of reporting commercial landings has changed in the past 8 years in 
+Puerto Rico. Prior to 2020, there was only one way that commercial 
+fishermen could report their landings and that was with the commercial 
+catch report (CCR) form for Puerto Rico, which was a paper form. Since 
+2020, fishermen can opt to report their landings using the Puerto Rico 
+Department of Natural and Environmental Resources electronic reporting 
+(e-reporting) system rather than the CCR form. Fishermen can access the 
+e-reporting application with their phones, tablets, or computers. They 
+collect and submit the required data, such as fish type, time of catch, 
+quantity of catch and more, while they are out on the water, at the 
+dock, or back at home. Some continue to use the CCR form, while others 
+are opting to use the e-reporting application.
+    Rainbow runner has never been a species identified on the CCR form. 
+For a fisherman to report landings of rainbow runner on the CCR form, 
+they have to either include those landings within the broader listed 
+category of jacks or write in rainbow runner and its landings on the 
+form. There is a similar issue with e-reporting. Fishermen who land 
+rainbow runner have to search for rainbow runner and mark it when using 
+the app or can include its landings under the broader category of 
+jacks. Consequently, it is expected that reported landings, 
+specifically of rainbow runner, do not include all landings of rainbow 
+runner, and that reported landings (specifically of jacks)
+
+[[Page 42161]]
+
+include not just rainbow runner, but other species as well.
+    Commercial landings data from 2021 through 2022 are used to 
+estimate the number of small businesses that would be directly affected 
+by this proposed rule. Note, earlier years of data are excluded to 
+preserve confidentiality. From 2021 through 2022, there were an average 
+of five fishermen that reported landings of rainbow runner annually and 
+each landed, on average, approximately 180 lb (82 kg) of rainbow runner 
+from all waters. During that same period, an annual average of 265 
+fishermen reported landings of jacks from the EEZ and unknown waters 
+and each landed, on average, approximately 225 lb (102 kg) of jacks.
+    Each commercial fisherman in Puerto Rico is assumed to represent a 
+unique commercial fishing business. The greatest annual total revenue 
+from all landings among any of the fishermen who reported landings of 
+either jacks (as a general category) or rainbow runner from the EEZ and 
+unknown waters was less than $100,000. More generally, maximum total 
+annual revenue for any commercial fisherman operating in Puerto Rico 
+was less than $600,000 from 2015 through 2019.
+    For RFA purposes only, NMFS has established a small business size 
+standard for businesses, including their affiliates, whose primary 
+industry is commercial fishing (see 50 CFR 200.2). A business primarily 
+engaged in commercial fishing (North American Industry Classification 
+System (NAICS) code 11411) is classified as a small business if it is 
+independently owned and operated, is not dominant in its field of 
+operation (including its affiliates), and has combined annual receipts 
+not in excess of $11 million for all its affiliated operations 
+worldwide. All of the commercial fishing businesses directly regulated 
+by this proposed rule are believed to be small entities based on the 
+NMFS size standard. No other small entities that would be directly 
+affected by this proposed rule have been identified.
+    This proposed rule would reclassify rainbow runner from a reef fish 
+to a pelagic fish under the Puerto Rico FMP. There are multiple impacts 
+of the reclassification on small commercial fishing businesses that 
+harvest rainbow runner from the EEZ and unknown waters.
+    First, currently as a reef fish, fishing for and possession of 
+rainbow runner is prohibited from October 1 through March 31, each 
+year, in or from those parts of Bajo de Sico that are in the EEZ around 
+Puerto Rico. This seasonal closure does not apply to pelagic fish. As 
+such, the proposed reclassification of rainbow runner from a reef fish 
+to a pelagic fish could directly benefit small commercial fishing 
+businesses by allowing them to fish for and possess rainbow runner 
+during the Bajo de Sico closed season. Bajo de Sico is an area of state 
+and Federal waters off the west coast of Puerto Rico and most reported 
+landings of rainbow runner or jacks occur on Puerto Rico's west coast. 
+The magnitude of the potential direct economic benefit, however, cannot 
+be estimated since CCR and e-reporting landings data are not of 
+sufficient detail to estimate rainbow runner landings that derive from 
+fishing in Federal waters of Bajo de Sico. Any potential increase in 
+landings, ex-vessel revenue, or profits would be constrained by the 
+commercial ACL and the proposed ACT.
+    Second, as a reef fish, rainbow runner currently has a commercial 
+ACL of 913 lb (414.1 kg) and no corresponding commercial ACT. Each 
+pelagic fish under the Puerto Rico FMP has both a commercial ACL and 
+commercial ACT, the latter of which is set at 90 percent of the 
+commercial ACL. This proposed rule would keep the commercial ACL for 
+rainbow runner at 913 lb (414.1 kg) and establish a proposed commercial 
+ACT of 822 lb (373 kg). Landings of rainbow runner as a pelagic fish 
+would be compared to its commercial ACT rather than just its commercial 
+ACL to determine if an action must be taken to limit its landings. The 
+potential impact of this, however, is dependent on the proposed changes 
+to the AM for rainbow runner, as discussed in the next paragraph.
+    Third, as a reef fish, rainbow runner currently has an AM that is 
+more likely to cause a reduction in the length of the fishing season 
+than if it were a pelagic fish. Currently, the AM for rainbow runner as 
+a reef fish is as follows. At or near the beginning of the fishing 
+year, commercial landings for reef fish are evaluated relative to the 
+commercial ACL based on a moving multi-year average of landings, as 
+described in the Puerto Rico FMP. If the multi-year average of 
+commercial landings exceeds the commercial ACL (which is the trigger), 
+the length of the fishing season is reduced. However, no reduction in 
+the fishing season is required if NMFS determines that a reduction is 
+not necessary based on the best scientific information available or if 
+the ACL was exceeded because data collection or monitoring improved 
+rather than because landings increased. In 2022, commercial landings of 
+rainbow runner exceeded its commercial ACL. However, NMFS determined 
+that the increased landings were indicative of improvement in data 
+collection and monitoring, rather than increased effort, and as such, 
+there was no reduction in the length of the fishing season for rainbow 
+runner. Nonetheless, if commercial landings continue to exceed the 
+commercial ACL for rainbow runner, it could lead to a possible 
+reduction in the length of a future fishing season.
+    If reclassified as a pelagic fish, the AM for rainbow runner would 
+be as follows. At or near the beginning of the fishing year, commercial 
+landings for rainbow runner will be evaluated relative to the 
+commercial ACT based on a moving multi-year average of landings, as 
+described in the Puerto Rico FMP. If NMFS estimates that commercial 
+landings have exceeded the commercial ACT, NMFS, in consultation with 
+the Council, will determine appropriate corrective action. In 2022, 
+commercial landings exceeded the proposed commercial ACT, which 
+indicates there could be more triggering of the AM for rainbow runner 
+as a pelagic fish rather than as a reef fish. As described above, if 
+increased landings are indicative of improvement in data collection or 
+monitoring, rather than increased effort, no corrective action may be 
+necessary to limit landings. However, if there was an increase in 
+effort, as a pelagic fish, a reduction in the length of the fishing 
+season would be among the kinds of corrective actions that could be 
+used to reduce commercial landings.
+    There have been no reductions in the length of a rainbow runner 
+fishing season to date. No single year or multi-year average of 
+reported commercial landings of rainbow runner (CCR form) from 2015 
+through 2019 reached or exceeded the commercial ACL of 913 lb (414.1 
+kg). However, in 2022 with the inclusion of e-reporting, commercial 
+landings of rainbow runner exceeded its commercial ACL for the first 
+time. NMFS determined that the overage was due to enhanced or improved 
+data collection or monitoring and no AM was implemented for the 
+species.
+    Assuming future fishing effort and rainbow runner landings remain 
+consistent with historical effort and landings, the establishment of 
+the proposed commercial ACT and the proposed changes to the rainbow 
+runner AM would not be expected to have a significant economic impact 
+on small businesses. This proposed rule could have a potential 
+beneficial economic impact on small commercial fishing businesses in 
+Puerto Rico by allowing them to fish for rainbow runner in Federal 
+waters of Bajo de Sico when it is otherwise closed to reef fish 
+fishing.
+
+[[Page 42162]]
+
+This potential beneficial impact cannot be estimated with available 
+data; however, it would be constrained upwards by the commercial ACL 
+and proposed ACT.
+    In summary, this proposed rule would reclassify rainbow runner from 
+being a reef fish to a pelagic fish. The establishment of the proposed 
+commercial ACT and the proposed changes to the rainbow runner AM would 
+not be expected to have significant economic impacts on small 
+businesses. This proposed rule could have a potential beneficial 
+economic impact on small commercial fishing businesses in Puerto Rico 
+by allowing them to fish for rainbow runner in Federal waters of Bajo 
+de Sico when it is otherwise closed to reef fish fishing. This 
+beneficial impact cannot be estimated with available data; however, it 
+would be constrained upwards by the commercial ACL and proposed ACT. In 
+conclusion, this proposed rule would not be expected to have a 
+significant economic impact on a substantial number of small entities. 
+As a result, an initial regulatory flexibility analysis is not required 
+and none has been prepared.
+
+List of Subjects in 50 CFR Part 622
+
+    Caribbean, Fisheries, Fishing, Puerto Rico, Rainbow runner.
+
+
+    Authority:  16 U.S.C. 1801 et seq.
+
+    Dated: July 6, 2026.
+Samuel D. Rauch III,
+Deputy Assistant Administrator for Regulatory Programs, National Marine 
+Fisheries Service.
+
+    For the reasons set out in the preamble, NMFS proposes to amend 50 
+CFR part 622 as follows:
+
+PART 622--FISHERIES OF THE CARIBBEAN, GULF OF AMERICA, AND SOUTH 
+ATLANTIC
+
+0
+1. The authority citation for part 622 continues to read as follows:
+
+    Authority:  16 U.S.C. 1801 et seq.
+
+0
+2. In Sec.  622.431, under the definition of Pelagic fish revise Table 
+1 to Sec.  622.431 and under the definition of Reef fish revise Table 3 
+to Sec.  622.431 to read as follows:
+
+
+Sec.  622.431  Definitions.
+
+* * * * *
+
+                        Table 1 to Sec.   622.431
+------------------------------------------------------------------------
+       Class or family           Scientific name     English common name
+------------------------------------------------------------------------
+Dolphinfishes--Coryphaenidae  Coryphaena hippurus.  Dolphinfish.
+                              Coryphaena equiselis  Pompano dolphinfish.
+Barracudas--Sphyraenidae....  Sphyraena barracuda.  Great barracuda.
+Jacks--Carangidae...........  Elagatis bipinnulata  Rainbow runner.
+Mackerels and tunas--         Thunnus atlanticus..  Blackfin tuna.
+ Scombridae.
+                              Scomberomorus         Cero.
+                               regalis.
+                              Scomberomorus         King mackerel.
+                               cavalla.
+                              Euthynnus             Little tunny.
+                               alletteratus.
+                              Acanthocybium         Wahoo.
+                               solandri.
+Tripletails--Lobotidae......  Lobotes surinamensis  Tripletail.
+------------------------------------------------------------------------
+
+* * * * *
+
+                        Table 3 to Sec.   622.431
+------------------------------------------------------------------------
+       Class or family           Scientific name     English common name
+------------------------------------------------------------------------
+Angelfishes--Pomacanthidae..  Pomacanthus paru....  French angelfish.
+                              Pomacanthus arcuatus  Gray angelfish.
+                              Holacanthus ciliaris  Queen angelfish.
+Groupers--Serranidae........  Mycteroperca bonaci.  Black grouper.
+                              Cephalopholis fulva.  Coney.
+                              Epinephelus itajara.  Goliath grouper.
+                              Cephalopholis         Graysby.
+                               cruentata.
+                              Hyporthodus           Misty grouper.
+                               mystacinus.
+                              Epinephelus striatus  Nassau grouper.
+                              Epinephelus morio...  Red grouper.
+                              Epinephelus guttatus  Red hind.
+                              Epinephelus           Rock hind.
+                               adscensionis.
+                              Mycteroperca tigris.  Tiger grouper.
+                              Hyporthodus           Yellowedge grouper.
+                               flavolimbatus.
+                              Mycteroperca          Yellowfin grouper.
+                               venenosa.
+                              Mycteroperca          Yellowmouth grouper.
+                               interstitialis.
+Grunts--Haemulidae..........  Haemulon plumierii..  White grunt.
+Jacks--Carangidae...........  Alectis ciliaris....  African pompano.
+                              Caranx hippos.......  Crevalle jack.
+Parrotfishes--Scaridae......  Scarus coeruleus....  Blue parrotfish.
+                              Scarus coelestinus..  Midnight parrotfish.
+                              Scarus taeniopterus.  Princess parrotfish.
+                              Scarus vetula.......  Queen parrotfish.
+                              Scarus guacamaia....  Rainbow parrotfish.
+                              Sparisoma             Redband parrotfish.
+                               aurofrenatum.
+                              Sparisoma             Redtail parrotfish.
+                               chrysopterum.
+                              Sparisoma viride....  Stoplight
+                                                     parrotfish.
+
+[[Page 42163]]
+
+ 
+                              Scarus iseri........  Striped parrotfish.
+Snappers--Lutjanidae........  Apsilus dentatus....  Black snapper.
+                              Lutjanus buccanella.  Blackfin snapper.
+                              Pristipomoides        Cardinal snapper.
+                               macrophthalmus.
+                              Lutjanus cyanopterus  Cubera snapper.
+                              Lutjanus jocu.......  Dog snapper.
+                              Lutjanus synagris...  Lane snapper.
+                              Lutjanus analis.....  Mutton snapper.
+                              Etelis oculatus.....  Queen snapper.
+                              Lutjanus apodus.....  Schoolmaster.
+                              Lutjanus vivanus....  Silk snapper.
+                              Rhomboplites          Vermilion snapper.
+                               aurorubens.
+                              Pristipomoides        Wenchman.
+                               aquilonaris.
+                              Ocyurus chrysurus...  Yellowtail snapper.
+Surgeonfishes--Acanthuridae.  Acanthurus coeruleus  Blue tang.
+                              Acanthurus chirurgus  Doctorfish.
+                              Acanthurus tractus..  Ocean surgeonfish.
+Triggerfishes--Balistidae...  Balistes capriscus..  Gray triggerfish.
+                              Canthidermis          Ocean triggerfish.
+                               sufflamen.
+                              Balistes vetula.....  Queen triggerfish.
+Wrasses--Labridae...........  Lachnolaimus maximus  Hogfish.
+                              Halichoeres radiatus  Puddingwife.
+                              Bodianus rufus......  Spanish hogfish.
+------------------------------------------------------------------------
+
+* * * * *
+0
+3. In Sec.  622.440, revise paragraphs (a)(1) through (a)(3) and 
+paragraph (b) to read as follows:
+
+
+Sec.  622.440  Annual catch limits (ACLs), annual catch targets (ACTs), 
+and accountability measures (AMs).
+
+    (a) * * *
+    (1) Commercial ACLs. The commercial ACLs are as follows and given 
+in round weight.
+
+                                         Table 1 to Sec.   622.440(a)(1)
+----------------------------------------------------------------------------------------------------------------
+                                     Stock or stock complex and
+              Family                    species composition                       Commercial ACL
+----------------------------------------------------------------------------------------------------------------
+Angelfishes......................  Angelfish--French angelfish,   137 lb (62.1 kg).
+                                    gray angelfish, queen
+                                    angelfish.
+Groupers.........................  Grouper 3--coney,\1\ graysby.  23,890 lb (10,836.3 kg).
+                                   Grouper 4--black grouper, red  2,492 lb (1,130.3 kg).
+                                    grouper, tiger grouper,
+                                    yellowfin grouper,
+                                    yellowmouth grouper.
+                                   Grouper 5--misty grouper,      15,327 lb (6,952.2 kg).
+                                    yellowedge grouper.
+                                   Grouper 6--red hind,\1\ rock   121,729 lb (55,215.3 kg).
+                                    hind.
+Grunts...........................  Grunts--white grunt..........  177,923 lb (80,704.5 kg).
+Jacks............................  Jacks 1--crevalle jack.......  46 lb (20.8 kg).
+                                   Jacks 2--African pompano.....  1,052 lb (477.1 kg).
+Parrotfishes.....................  Parrotfish 2--princess         147,774 lb (67,029.1 kg).
+                                    parrotfish, queen
+                                    parrotfish, redband
+                                    parrotfish, redtail
+                                    parrotfish, stoplight
+                                    parrotfish, striped
+                                    parrotfish.
+Snappers.........................  Snapper 1--black snapper,      424,009 lb (192,327.2 kg).
+                                    blackfin snapper, silk
+                                    snapper,\1\ vermilion
+                                    snapper, wenchman.
+                                   Snapper 2--cardinal snapper,   257,236 lb (116,680.2 kg).
+                                    queen snapper \1\.
+                                   Snapper 3--lane snapper......  244,376 lb (110,847 kg).
+                                   Snapper 4--dog snapper,        116,434 lb (52,813.5 kg).
+                                    mutton snapper,\1\
+                                    schoolmaster.
+                                   Snapper 5--yellowtail snapper  315,806 lb (143,247.1 kg).
+                                   Snapper 6--cubera snapper....  119 lb (53.9 kg).
+Surgeonfishes....................  Surgeonfish--blue tang,        147 lb (66.6 kg).
+                                    doctorfish, ocean
+                                    surgeonfish.
+Triggerfishes....................  Triggerfish--gray              83,099 lb (37,693 kg).
+                                    triggerfish, ocean
+                                    triggerfish, queen
+                                    triggerfish \1\.
+Wrasses..........................  Wrasses 1--hogfish...........  70,140 lb (31,814.9 kg).
+                                   Wrasses 2--puddingwife,        20,126 lb (9,129 kg).
+                                    Spanish hogfish.
+----------------------------------------------------------------------------------------------------------------
+\1\ Indicator stock.
+
+    (2) Recreational ACLs. The recreational ACLs are as follows and 
+given in round weight.
+
+                                         Table 2 to Sec.   622.440(a)(2)
+----------------------------------------------------------------------------------------------------------------
+                                     Stock or stock complex and
+              Family                    species composition                      Recreational ACL
+----------------------------------------------------------------------------------------------------------------
+Angelfishes......................  Angelfish--French angelfish,   2,985 lb (1,353.9 kg).
+                                    gray angelfish, queen
+                                    angelfish.
+Groupers.........................  Grouper 3--coney,\1\ graysby.  19,634 lb (8,905.8 kg).
+
+[[Page 42164]]
+
+ 
+                                   Grouper 4--black grouper, red  5,867 lb (2,661.2 kg).
+                                    grouper, tiger grouper,
+                                    yellowfin grouper,
+                                    yellowmouth grouper.
+                                   Grouper 5--misty grouper,      4,225 lb (1,916.4 kg).
+                                    yellowedge grouper.
+                                   Grouper 6--red hind,\1\ rock   34,493 lb (15,645.7 kg).
+                                    hind.
+Grunts...........................  Grunts--white grunt..........  2,461 lb (1,116.2 kg).
+Jacks............................  Jacks 1--crevalle jack.......  41,894 lb (19,002.7 kg).
+                                   Jacks 2--African pompano.....  5,719 lb (2,594 kg).
+Parrotfishes.....................  Parrotfish 2--princess         17,052 lb (7,734.6 kg).
+                                    parrotfish, queen
+                                    parrotfish, redband
+                                    parrotfish, redtail
+                                    parrotfish, stoplight
+                                    parrotfish, striped
+                                    parrotfish.
+Snappers.........................  Snapper 1--black snapper,      111,943 lb (50,776.4 kg).
+                                    blackfin snapper, silk
+                                    snapper,\1\ vermilion
+                                    snapper, wenchman.
+                                   Snapper 2--cardinal snapper,   24,974 lb (11,328 kg).
+                                    queen snapper \1\.
+                                   Snapper 3--lane snapper......  21,603 lb (9,798.9 kg).
+                                   Snapper 4--dog snapper,        76,625 lb (34,756.5 kg).
+                                    mutton snapper,\1\
+                                    schoolmaster.
+                                   Snapper 5--yellowtail snapper  23,988 lb (10,880.7 kg).
+                                   Snapper 6--cubera snapper....  6,448 lb (2,924.7 kg).
+Surgeonfishes....................  Surgeonfish--blue tang,        860 lb (390 kg).
+                                    doctorfish, ocean
+                                    surgeonfish.
+Triggerfishes....................  Triggerfish--gray              7,453 lb (3,380.6 kg).
+                                    triggerfish, ocean
+                                    triggerfish, queen
+                                    triggerfish \1\.
+Wrasses..........................  Wrasses 1--hogfish...........  8,263 lb (3,748 kg).
+                                   Wrasses 2--puddingwife,        5,372 lb (2,436.6 kg).
+                                    Spanish hogfish.
+----------------------------------------------------------------------------------------------------------------
+\1\ Indicator stock.
+
+    (3) Total ACLs. The total ACLs (combined commercial and 
+recreational ACLs) are as follows and given in round weight.
+
+                                         Table 3 to Sec.   622.440(a)(3)
+----------------------------------------------------------------------------------------------------------------
+                                     Stock or stock complex and
+              Family                    species composition                          Total ACL
+----------------------------------------------------------------------------------------------------------------
+Angelfishes......................  Angelfish--French angelfish,   3,122 lb (1,416.1 kg).
+                                    gray angelfish, queen
+                                    angelfish.
+Groupers.........................  Grouper 3--coney,\1\ graysby.  43,524 lb (19,742.1 kg).
+                                   Grouper 4--black grouper, red  8,359 lb (3,791.5 kg).
+                                    grouper, tiger grouper,
+                                    yellowfin grouper,
+                                    yellowmouth grouper.
+                                   Grouper 5--misty grouper,      19,552 lb (8,868.6 kg).
+                                    yellowedge grouper.
+                                   Grouper 6--red hind,\1\ rock   156,222 lb (70,861.1 kg).
+                                    hind.
+Grunts...........................  Grunts--white grunt..........  180,384 lb (81,820.8 kg).
+Jacks............................  Jacks 1--crevalle jack.......  41,940 lb (19,023.6 kg).
+                                   Jacks 2--African pompano.....  6,771 lb (3,071.2 kg).
+Parrotfishes.....................  Parrotfish 2--princess         164,826 lb (74,763.8 kg).
+                                    parrotfish, queen
+                                    parrotfish, redband
+                                    parrotfish, redtail
+                                    parrotfish, stoplight
+                                    parrotfish, striped
+                                    parrotfish.
+Snappers.........................  Snapper 1--black snapper,      535,952 lb (243,103.7 kg).
+                                    blackfin snapper, silk
+                                    snapper,\1\ vermilion
+                                    snapper, wenchman.
+                                   Snapper 2--cardinal snapper,   282,210 lb (128,008.3 kg).
+                                    queen snapper \1\.
+                                   Snapper 3--lane snapper......  265,979 lb (120,646 kg).
+                                   Snapper 4--dog snapper,        193,059 lb (87,570 kg).
+                                    mutton snapper,\1\
+                                    schoolmaster.
+                                   Snapper 5--yellowtail snapper  339,794 lb (154,127.9 kg).
+                                   Snapper 6--cubera snapper....  6,567 lb (2,978.7 kg).
+Surgeonfishes....................  Surgeonfish--blue tang,        1,007 lb (456.7 kg).
+                                    doctorfish, ocean
+                                    surgeonfish.
+Triggerfishes....................  Triggerfish--gray              90,552 lb (41,073.6 kg).
+                                    triggerfish, ocean
+                                    triggerfish, queen
+                                    triggerfish \1\.
+Wrasses..........................  Wrasses 1--hogfish...........  78,403 lb (35,563 kg).
+                                   Wrasses 2--puddingwife,        25,498 lb (11,565.6 kg).
+                                    Spanish hogfish.
+----------------------------------------------------------------------------------------------------------------
+\1\ Indicator stock.
+
+* * * * *
+    (b) Pelagic fish. The ACLs and ACTs are given in round weight. 
+Indicator stocks are noted in the relevant tables to paragraph (a) of 
+this section. For those fishing commercially, the applicable ACL is the 
+commercial ACL and the applicable ACT is the commercial ACT. For those 
+fishing recreationally, the applicable ACL is the recreational ACL and 
+the applicable ACT is the recreational ACT. When landings for one 
+sector are not available for comparison to that sector's ACL and ACT, 
+the ACL and ACT for the sector with available landings are the ACL and 
+ACT for the stock or stock complex.
+    (1) Barracuda--great barracuda.
+    (i) Commercial ACL--495 lb (224.5 kg).
+    (ii) Commercial ACT--445 lb (201.8 kg).
+    (iii) Recreational ACL--167,693 lb (76,064.2 kg).
+    (iv) Recreational ACT--150,924 lb (68,457.9 kg).
+    (2) Dolphinfishes--dolphinfish, pompano dolphinfish.
+    (i) Commercial ACL--232,173 lb (105,311.9 kg).
+    (ii) Commercial ACT--208,956 lb (94,780.8 kg).
+    (iii) Recreational ACL--1,513,873 lb (686,681.2 kg).
+    (iv) Recreational ACT--1,362,486 lb (618,013.2 kg).
+    (3) Jacks--rainbow runner.
+    (i) Commercial ACL--913 lb (414.1 kg).
+    (ii) Commercial ACT--822 lb (373 kg).
+
+[[Page 42165]]
+
+    (iii) Recreational ACL--8,091 lb (3,670 kg).
+    (iv) Recreational ACT--7,282 lb (3,303 kg).
+    (4) Mackerels--cero, king mackerel.
+    (i) Commercial ACL--232,422 lb (105,424.8 kg).
+    (ii) Commercial ACT--209,180 lb (94,882.4 kg).
+    (iii) Recreational ACL--129,180 lb (58,595 kg).
+    (iv) Recreational ACT--116,262 lb (52,735.5 kg).
+    (5) Tripletail.
+    (i) Commercial ACL--270 lb (122.4 kg).
+    (ii) Commercial ACT--243 lb (110.2 kg).
+    (iii) Recreational ACL--39,005 lb (17,692.3 kg).
+    (iv) Recreational ACT--35,105 lb (15,923.3 kg).
+    (6) Tunas--blackfin tuna, little tunny.
+    (i) Commercial ACL--82,779 lb (37,547.9 kg).
+    (ii) Commercial ACT--74,501 lb (33,793 kg).
+    (iii) Recreational ACL--34,485 lb (15,642.1 kg).
+    (iv) Recreational ACT--31,037 lb (14,078.1 kg).
+    (7) Wahoo.
+    (i) Commercial ACL--25,911 lb (11,753 kg).
+    (ii) Commercial ACT--23,320 lb (10,577.7 kg).
+    (iii) Recreational ACL--210,737 lb (95,588.6 kg).
+    (iv) Recreational ACT--189,663 lb (86,029.6 kg).
+    (8) Pelagic fish AM application. At or near the beginning the 
+fishing year, landings for each stock, stock complex, or indicator 
+stock will be evaluated relative to the applicable ACT for the stock or 
+stock complex based on a moving multi-year average of landings, as 
+described in the FMP. If NMFS estimates that landings have exceeded the 
+applicable ACT specified in paragraph (b) of this section for a stock 
+or stock complex, NMFS in consultation with the Caribbean Fishery 
+Management Council will determine appropriate corrective action.
+* * * * *
+[FR Doc. 2026-13808 Filed 7-7-26; 8:45 am]
+BILLING CODE 3510-22-P
+
+
+</pre><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
