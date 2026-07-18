@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ÁGORA · Deadline-to-Defense</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar"><div><strong>ÁGORA</strong><span>Evidence-Bound Public Participation</span></div><button id="language">ES</button></header>
+  <main>
+    <section id="loading" class="panel">Loading frozen docket…</section>
+    <section id="app" hidden>
+      <div class="eyebrow">Deadline-to-Defense · Frozen verified fixture</div>
+      <section class="hero panel">
+        <div><p class="kicker" id="docket"></p><h1 id="title"></h1><p id="agency"></p></div>
+        <div class="deadline"><span>COMMENTS CLOSE</span><strong id="deadline"></strong><a id="comment-link" target="_blank" rel="noreferrer">Official participation portal ↗</a></div>
+      </section>
+      <details class="panel instructions"><summary>Verified participation instructions <span>source-bound</span></summary><pre id="instructions"></pre></details>
+      <div class="workspace">
+        <section class="panel claim-card">
+          <div class="row"><span class="claim-id" id="claim-id"></span><span class="label" id="claim-label"></span></div>
+          <h2>Material bilingual claim</h2><p class="claim en" id="claim-en"></p><p class="claim es" id="claim-es"></p>
+          <div class="source"><strong id="source-id"></strong><span id="source-range"></span><blockquote id="source-text"></blockquote></div>
+          <div class="challenge"><span>ADVERSARIAL QUESTION</span><p id="question"></p></div>
+          <fieldset><legend>Human decision</legend><div id="decisions" class="decisions"></div></fieldset>
+        </section>
+        <aside class="panel defense">
+          <h2>Defense status</h2><div id="status" class="status blocked"></div><div id="gates"></div>
+          <div id="diff" hidden><h3>Grounded diff</h3><p class="removed" id="before"></p><p class="added" id="after"></p></div>
+          <p class="watermark">DRAFT</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <footer>Drafts are not legal advice. Petitioning the legislature or an agency is not the practice of law. Never auto-submitted.</footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
