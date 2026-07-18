@@ -122,7 +122,7 @@ export const SEEDED_EVIDENCE_INTAKE = Object.freeze({
       sourceId: "ORG-01",
       file: "organization-approved-evidence",
       start: 0,
-      end: 154,
+      end: 164,
       text: "Member fishers operating in three coastal municipalities reported concern that changes to catch management could affect trip planning and near-term operating costs."
     }
   }, {
@@ -131,7 +131,7 @@ export const SEEDED_EVIDENCE_INTAKE = Object.freeze({
     owner: "Participating organization",
     language: "English",
     sourceSpan: {
-      sourceId: "ORG-02", file: "organization-approved-evidence", start: 0, end: 116,
+      sourceId: "ORG-02", file: "organization-approved-evidence", start: 0, end: 125,
       text: "The organization supports measures tied to fishery science and requests clear explanations of sector accountability measures."
     }
   }, {
@@ -140,7 +140,7 @@ export const SEEDED_EVIDENCE_INTAKE = Object.freeze({
     owner: "Participating organization",
     language: "Spanish",
     sourceSpan: {
-      sourceId: "ORG-03", file: "organization-approved-evidence", start: 0, end: 133,
+      sourceId: "ORG-03", file: "organization-approved-evidence", start: 0, end: 144,
       text: "Pescadores participantes solicitaron que cualquier afirmación económica se limite a experiencias documentadas y no se generalice a toda la isla."
     }
   }]
