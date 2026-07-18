@@ -1,5 +1,6 @@
 export const CLAIM_LABELS = Object.freeze(["E", "I", "A", "R"]);
 export const HUMAN_DECISIONS = Object.freeze(["ANSWER", "LIMIT", "REJECT", "UNRESOLVED"]);
+export const PACKET_STATUSES = Object.freeze(["BLOCKED", "READY FOR HUMAN REVIEW", "EXCLUDED"]);
 
 function tokens(value) {
   return String(value).match(/\b\d[\d,.]*\b|\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{1,2},\s+\d{4}\b|\b\d{4}-\d{2}-\d{2}\b/gi) ?? [];
@@ -16,61 +17,136 @@ export function noNewCitations(claim) {
   return claim.citationSourceIds.every((id) => approved.has(id));
 }
 
+export function isRealGroundedDiff(claim) {
+  if (!claim.groundedDiff) return false;
+  const { before, after } = claim.groundedDiff;
+  return before?.en !== after?.en && before?.es !== after?.es;
+}
+
 export function evaluateExport(claim) {
+  if (claim.humanDecision === "REJECT") {
+    return {
+      gates: {
+        sourceSpanBound: Boolean(claim.sourceSpan?.sourceId && claim.sourceSpan?.text),
+        noNewCitations: noNewCitations(claim),
+        datesAndNumbersPreserved: datesAndNumbersPreserved(claim),
+        humanDecisionResolved: true,
+        groundedDiffComplete: false
+      },
+      status: "EXCLUDED"
+    };
+  }
+
   const gates = {
     sourceSpanBound: Boolean(claim.sourceSpan?.sourceId && claim.sourceSpan?.text),
     noNewCitations: noNewCitations(claim),
     datesAndNumbersPreserved: datesAndNumbersPreserved(claim),
-    humanDecisionResolved: ["ANSWER", "LIMIT", "REJECT"].includes(claim.humanDecision),
-    groundedDiffComplete: claim.humanDecision === "REJECT" || Boolean(claim.groundedDiff)
+    humanDecisionResolved: ["ANSWER", "LIMIT"].includes(claim.humanDecision),
+    groundedDiffComplete: claim.humanDecision === "ANSWER" || (claim.humanDecision === "LIMIT" && isRealGroundedDiff(claim))
   };
-  return {
-    gates,
-    status: Object.values(gates).every(Boolean) ? "READY FOR HUMAN REVIEW" : "BLOCKED"
-  };
+  return { gates, status: Object.values(gates).every(Boolean) ? "READY FOR HUMAN REVIEW" : "BLOCKED" };
 }
 
-export function buildSeedClaim(fixture) {
-  const sourceSpan = fixture.sourceSpans.operative;
+function baseClaim({ id, claim, label, text, sourceSpan, approvedSourceIds, adversarialQuestion, evidenceStatus }) {
   return {
-    id: "C-01",
-    claim: "Rainbow runner reclassification",
-    label: "E",
-    text: {
-      en: "The proposed rule would reclassify rainbow runner from a reef fish to a pelagic fish while retaining sector-specific annual catch limits.",
-      es: "La regla propuesta reclasificaría el medregal de una especie de arrecife a una pelágica, manteniendo los límites de captura anual específicos por sector."
-    },
-    sourceSpan,
+    id, claim, label, text, sourceSpan,
     owner: "Participating organization",
     language: "bilingual",
     humanDecision: "UNRESOLVED",
-    approvedSourceIds: [sourceSpan.sourceId],
-    citationSourceIds: [sourceSpan.sourceId],
-    adversarialQuestion: "What evidence shows that retaining sector-specific catch limits remains appropriate after reclassification?",
+    evidenceStatus,
+    approvedSourceIds,
+    citationSourceIds: [...approvedSourceIds],
+    adversarialQuestion,
     groundedDiff: null
   };
 }
 
-export function decideClaim(claim, decision) {
-  if (!HUMAN_DECISIONS.includes(decision)) throw new Error("Invalid human decision");
-  const next = { ...claim, humanDecision: decision };
-  if (decision === "LIMIT") {
-    next.groundedDiff = {
-      before: claim.text,
-      after: {
-        en: "The proposed rule would reclassify rainbow runner from a reef fish to a pelagic fish and states that sector-specific annual catch limits would be retained.",
-        es: "La regla propuesta reclasificaría el medregal de una especie de arrecife a una pelágica y dispone que se mantendrían los límites de captura anual específicos por sector."
+export function buildDemoClaims(fixture, approvedEvidence) {
+  const official = fixture.sourceSpans.operative;
+  const local = approvedEvidence.items[0];
+  return [
+    baseClaim({
+      id: "C-01",
+      claim: "Rainbow runner reclassification",
+      label: "E",
+      text: {
+        en: "The proposed rule would reclassify rainbow runner from a reef fish to a pelagic fish while retaining sector-specific annual catch limits.",
+        es: "La regla propuesta reclasificaría el medregal de una especie de arrecife a una pelágica, manteniendo los límites de captura anual específicos por sector."
       },
+      sourceSpan: official,
+      approvedSourceIds: [official.sourceId],
+      adversarialQuestion: "Does the bound Federal Register span support both the reclassification and retention of sector-specific catch limits?",
+      evidenceStatus: "SUPPORTED"
+    }),
+    baseClaim({
+      id: "C-02",
+      claim: "Island-wide fiscal effect",
+      label: "I",
+      text: {
+        en: "The proposed reclassification will create an island-wide fiscal burden for Puerto Rico's fishing economy.",
+        es: "La reclasificación propuesta creará una carga fiscal en toda la isla para la economía pesquera de Puerto Rico."
+      },
+      sourceSpan: local.sourceSpan,
+      approvedSourceIds: [local.sourceId],
+      adversarialQuestion: "What approved evidence supports an island-wide fiscal effect rather than impacts reported by the participating organization's members in three municipalities?",
+      evidenceStatus: "NEEDS EVIDENCE"
+    })
+  ];
+}
+
+export function decideClaim(claim, decision, groundedRewrite = null) {
+  if (!HUMAN_DECISIONS.includes(decision)) throw new Error("Invalid human decision");
+  const next = { ...claim, humanDecision: decision, groundedDiff: null };
+  if (decision === "LIMIT") {
+    if (!groundedRewrite?.en || !groundedRewrite?.es) throw new Error("LIMIT requires a bilingual grounded rewrite");
+    next.groundedDiff = {
+      before: { ...claim.text },
+      after: { ...groundedRewrite },
       addedCitationSourceIds: [],
       positionChangedWithoutApproval: 0
     };
     next.text = next.groundedDiff.after;
-  } else if (decision === "ANSWER") {
-    next.groundedDiff = { before: claim.text, after: claim.text, addedCitationSourceIds: [], positionChangedWithoutApproval: 0 };
-  } else if (decision === "REJECT") {
-    next.groundedDiff = null;
-  } else {
-    next.groundedDiff = null;
+    next.evidenceStatus = "SUPPORTED WITHIN LIMITS";
   }
   return next;
 }
+
+export const SEEDED_EVIDENCE_INTAKE = Object.freeze({
+  organizationPosition: "Support evidence-based management while protecting small-scale fishing communities from unsupported economic assumptions.",
+  items: [{
+    sourceId: "ORG-01",
+    sourceName: "Approved member impact notes",
+    owner: "Participating organization",
+    language: "bilingual",
+    sourceSpan: {
+      sourceId: "ORG-01",
+      file: "organization-approved-evidence",
+      start: 0,
+      end: 154,
+      text: "Member fishers operating in three coastal municipalities reported concern that changes to catch management could affect trip planning and near-term operating costs."
+    }
+  }, {
+    sourceId: "ORG-02",
+    sourceName: "Board-approved policy position",
+    owner: "Participating organization",
+    language: "English",
+    sourceSpan: {
+      sourceId: "ORG-02", file: "organization-approved-evidence", start: 0, end: 116,
+      text: "The organization supports measures tied to fishery science and requests clear explanations of sector accountability measures."
+    }
+  }, {
+    sourceId: "ORG-03",
+    sourceName: "Community meeting summary",
+    owner: "Participating organization",
+    language: "Spanish",
+    sourceSpan: {
+      sourceId: "ORG-03", file: "organization-approved-evidence", start: 0, end: 133,
+      text: "Pescadores participantes solicitaron que cualquier afirmación económica se limite a experiencias documentadas y no se generalice a toda la isla."
+    }
+  }]
+});
+
+export const SEEDED_LIMIT_REWRITE = Object.freeze({
+  en: "Member fishers in three coastal municipalities reported that changes to catch management could affect trip planning and near-term operating costs.",
+  es: "Pescadores miembros en tres municipios costeros informaron que los cambios al manejo de capturas podrían afectar la planificación de viajes y los costos operacionales a corto plazo."
+});

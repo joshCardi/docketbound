@@ -1,25 +1,48 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildSeedClaim, decideClaim, evaluateExport } from "../src/lib/claim-ledger.js";
+import { buildDemoClaims, decideClaim, evaluateExport, isRealGroundedDiff, SEEDED_EVIDENCE_INTAKE, SEEDED_LIMIT_REWRITE } from "../src/lib/claim-ledger.js";
 import { loadFixture } from "../src/lib/fixture-loader.js";
 
-test("export stays blocked until a human resolves the challenge", async () => {
-  const claim = buildSeedClaim(await loadFixture());
+async function claims() { return buildDemoClaims(await loadFixture(), SEEDED_EVIDENCE_INTAKE); }
+
+test("C-01 visibly progresses BLOCKED to READY on ANSWER", async () => {
+  const [claim] = await claims();
+  const initial = evaluateExport(claim);
+  assert.equal(initial.status, "BLOCKED");
+  assert.equal(initial.gates.humanDecisionResolved, false);
+  assert.equal(initial.gates.groundedDiffComplete, false);
+  assert.equal(evaluateExport(decideClaim(claim, "ANSWER")).status, "READY FOR HUMAN REVIEW");
+});
+
+test("C-02 LIMIT requires and records a real bilingual rewrite", async () => {
+  const [, claim] = await claims();
+  assert.equal(claim.evidenceStatus, "NEEDS EVIDENCE");
   assert.equal(evaluateExport(claim).status, "BLOCKED");
-  const limited = decideClaim(claim, "LIMIT");
+  assert.throws(() => decideClaim(claim, "LIMIT"), /requires a bilingual grounded rewrite/);
+  const limited = decideClaim(claim, "LIMIT", SEEDED_LIMIT_REWRITE);
+  assert.equal(isRealGroundedDiff(limited), true);
+  assert.notEqual(limited.groundedDiff.before.en, limited.groundedDiff.after.en);
   assert.equal(evaluateExport(limited).status, "READY FOR HUMAN REVIEW");
-  assert.equal(limited.groundedDiff.addedCitationSourceIds.length, 0);
+});
+
+test("REJECT produces EXCLUDED and never READY", async () => {
+  const [, claim] = await claims();
+  const rejected = decideClaim(claim, "REJECT");
+  assert.equal(evaluateExport(rejected).status, "EXCLUDED");
+  assert.equal(rejected.groundedDiff, null);
 });
 
 test("a model-originated citation mechanically blocks export", async () => {
-  const claim = decideClaim(buildSeedClaim(await loadFixture()), "LIMIT");
-  claim.citationSourceIds.push("MODEL-INVENTED");
-  assert.equal(evaluateExport(claim).status, "BLOCKED");
-  assert.equal(evaluateExport(claim).gates.noNewCitations, false);
+  const [, claim] = await claims();
+  const limited = decideClaim(claim, "LIMIT", SEEDED_LIMIT_REWRITE);
+  limited.citationSourceIds.push("MODEL-INVENTED");
+  assert.equal(evaluateExport(limited).status, "BLOCKED");
+  assert.equal(evaluateExport(limited).gates.noNewCitations, false);
 });
 
 test("dates and numbers must match across languages", async () => {
-  const claim = decideClaim(buildSeedClaim(await loadFixture()), "LIMIT");
-  claim.text.en += " Effective 2026-08-07.";
-  assert.equal(evaluateExport(claim).gates.datesAndNumbersPreserved, false);
+  const [, claim] = await claims();
+  const limited = decideClaim(claim, "LIMIT", SEEDED_LIMIT_REWRITE);
+  limited.text.en += " Effective 2026-08-07.";
+  assert.equal(evaluateExport(limited).gates.datesAndNumbersPreserved, false);
 });
