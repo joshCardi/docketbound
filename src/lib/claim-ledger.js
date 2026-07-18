@@ -50,7 +50,7 @@ export function evaluateExport(claim) {
 function baseClaim({ id, claim, label, text, sourceSpan, approvedSourceIds, adversarialQuestion, evidenceStatus }) {
   return {
     id, claim, label, text, sourceSpan,
-    owner: "Participating organization",
+    owner: "Demo Fishing Community Organization (fictional)",
     language: "bilingual",
     humanDecision: "UNRESOLVED",
     evidenceStatus,
@@ -112,11 +112,14 @@ export function decideClaim(claim, decision, groundedRewrite = null) {
 }
 
 export const SEEDED_EVIDENCE_INTAKE = Object.freeze({
+  organizationName: "Demo Fishing Community Organization",
+  demoDisclosure: "Fictional demo data for evaluation — not a real organization or evidentiary record.",
+  isFictionalDemo: true,
   organizationPosition: "Support evidence-based management while protecting small-scale fishing communities from unsupported economic assumptions.",
   items: [{
     sourceId: "ORG-01",
     sourceName: "Approved member impact notes",
-    owner: "Participating organization",
+    owner: "Demo Fishing Community Organization (fictional)",
     language: "bilingual",
     sourceSpan: {
       sourceId: "ORG-01",
@@ -128,7 +131,7 @@ export const SEEDED_EVIDENCE_INTAKE = Object.freeze({
   }, {
     sourceId: "ORG-02",
     sourceName: "Board-approved policy position",
-    owner: "Participating organization",
+    owner: "Demo Fishing Community Organization (fictional)",
     language: "English",
     sourceSpan: {
       sourceId: "ORG-02", file: "organization-approved-evidence", start: 0, end: 125,
@@ -137,7 +140,7 @@ export const SEEDED_EVIDENCE_INTAKE = Object.freeze({
   }, {
     sourceId: "ORG-03",
     sourceName: "Community meeting summary",
-    owner: "Participating organization",
+    owner: "Demo Fishing Community Organization (fictional)",
     language: "Spanish",
     sourceSpan: {
       sourceId: "ORG-03", file: "organization-approved-evidence", start: 0, end: 144,

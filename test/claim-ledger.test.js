@@ -6,6 +6,9 @@ import { loadFixture } from "../src/lib/fixture-loader.js";
 async function claims() { return buildDemoClaims(await loadFixture(), SEEDED_EVIDENCE_INTAKE); }
 
 test("approved evidence intake has 3–6 exact source spans", () => {
+  assert.equal(SEEDED_EVIDENCE_INTAKE.isFictionalDemo, true);
+  assert.match(SEEDED_EVIDENCE_INTAKE.organizationName, /Demo/i);
+  assert.match(SEEDED_EVIDENCE_INTAKE.demoDisclosure, /Fictional demo data/i);
   assert.ok(SEEDED_EVIDENCE_INTAKE.items.length >= 3 && SEEDED_EVIDENCE_INTAKE.items.length <= 6);
   for (const item of SEEDED_EVIDENCE_INTAKE.items) {
     assert.equal(item.sourceSpan.end - item.sourceSpan.start, item.sourceSpan.text.length);

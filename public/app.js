@@ -47,6 +47,8 @@ function setBusy(busy, message = "") {
 }
 
 function renderIntake() {
+  $("organization-name").textContent = state.intake.organizationName;
+  $("demo-disclosure").textContent = state.intake.demoDisclosure;
   $("position").value = state.intake.organizationPosition;
   $("evidence-count").textContent = `${state.intake.items.length} / 6 approved sources`;
   $("add-evidence").disabled = state.intake.items.length >= 6;
@@ -64,7 +66,7 @@ function renderIntake() {
 function addEvidence() {
   if (state.intake.items.length >= 6) return;
   const n = state.intake.items.length + 1;
-  state.intake.items.push({ sourceId: `ORG-0${n}`, sourceName: "New approved source", owner: "Participating organization", language: "bilingual", sourceSpan: { sourceId: `ORG-0${n}`, file: "organization-approved-evidence", start: 0, end: 0, text: "Pending exact approved source span." } });
+  state.intake.items.push({ sourceId: `ORG-0${n}`, sourceName: "New approved source", owner: "Demo Fishing Community Organization (fictional)", language: "bilingual", sourceSpan: { sourceId: `ORG-0${n}`, file: "organization-approved-evidence", start: 0, end: 0, text: "Pending exact approved source span." } });
   renderIntake();
 }
 
