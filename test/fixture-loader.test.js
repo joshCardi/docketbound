@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { loadFixture } from "../src/lib/fixture-loader.js";
+import { loadFixture, presentParticipationInstructions } from "../src/lib/fixture-loader.js";
 
 test("loads NOAA deadline and participation instructions from frozen raw sources", async () => {
   const fixture = await loadFixture();
@@ -9,4 +9,19 @@ test("loads NOAA deadline and participation instructions from frozen raw sources
   assert.match(fixture.participationInstructions, /Federal e-Rulemaking Portal/);
   assert.equal(fixture.sourceSpans.addresses.text, fixture.participationInstructions);
   assert.ok(fixture.sourceSpans.operative.start < fixture.sourceSpans.operative.end);
+  assert.equal(fixture.participationPresentation.raw, fixture.sourceSpans.addresses.text);
+  assert.equal(fixture.participationPresentation.methods.length, 2);
+  assert.match(fixture.participationPresentation.methods[0], /NOAA-NMFS-2025-0471/);
+  assert.doesNotMatch(fixture.participationPresentation.intro, /2025- 0471/);
+  assert.match(fixture.participationPresentation.methods[1], /263 13th Avenue South/);
+  const { raw, ...rendered } = fixture.participationPresentation;
+  assert.doesNotMatch(JSON.stringify(rendered), /<bullet>|<a href|``/);
+});
+
+test("faithful presentation changes markup only, not the bound raw span", () => {
+  const raw = "ADDRESSES: Visit <a href=\"https://example.gov\">https://example.gov</a>. <bullet> Enter ``D-01'' in Search. <bullet> Mail: 1 Main St. Instructions: Do not alter.";
+  const view = presentParticipationInstructions(raw);
+  assert.equal(view.raw, raw);
+  assert.equal(view.methods[0], "Enter “D-01” in Search.");
+  assert.equal(view.methods[1], "Mail: 1 Main St.");
 });

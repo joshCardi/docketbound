@@ -17,11 +17,16 @@
         <div><p class="kicker" id="docket"></p><h1 id="title"></h1><p id="agency"></p></div>
         <div class="deadline"><span>COMMENTS CLOSE</span><strong id="deadline"></strong><a id="comment-link" target="_blank" rel="noreferrer">Official participation portal ↗</a></div>
       </section>
-      <details class="panel instructions"><summary>Verified participation instructions <span>source-bound</span></summary><pre id="instructions"></pre></details>
+      <section class="panel instructions">
+        <div class="instructions-head"><strong>Verified participation instructions</strong><span>source-bound</span></div>
+        <p id="instructions-intro"></p><ul id="instructions-methods"></ul><p id="instructions-note"></p>
+        <details class="raw-source"><summary>View raw source</summary><pre id="instructions-raw"></pre></details>
+      </section>
       <section class="panel intake">
         <div class="section-head"><div><span class="step">STEP 3</span><h2>Approved evidence intake</h2></div><span id="evidence-count"></span></div>
         <div class="demo-disclosure"><strong id="organization-name"></strong><span id="demo-disclosure"></span></div>
         <label>Organization position<textarea id="position" rows="2"></textarea></label>
+        <label>Spanish mirror · Espejo en español<textarea id="position-es" rows="2"></textarea></label>
         <div id="evidence-items"></div>
         <button id="add-evidence" class="secondary">+ Add approved evidence</button>
         <p class="intake-note">Only approved entries become permissible claim sources. Minimum 3 · maximum 6.</p>
@@ -41,6 +46,17 @@
           <p class="watermark">DRAFT</p>
         </aside>
       </div>
+      <section id="packet-lock" class="panel packet-lock"><strong>Participation packet · BLOCKED</strong><span>Resolve or exclude every claim before rendering the packet.</span></section>
+      <article id="packet" class="panel packet" hidden>
+        <header><div><span class="packet-brand">ÁGORA</span><h2>Bilingual Participation Packet</h2><p id="packet-case"></p></div><div><span class="packet-status">READY FOR HUMAN REVIEW</span><button id="copy-packet">Copy</button><button id="print-packet">Print</button></div></header>
+        <div class="packet-demo"><strong id="packet-organization"></strong><span id="packet-disclosure"></span></div>
+        <section><h3>Organization position · Posición de la organización</h3><p id="packet-position"></p><p class="packet-es" id="packet-position-es"></p></section>
+        <section><h3>Claims ledger · Registro de afirmaciones</h3><div id="packet-claims"></div></section>
+        <section><h3>Approved evidence · Evidencia aprobada</h3><div id="packet-evidence"></div></section>
+        <section class="provenance-seal"><strong>PROVENANCE SEALED</strong><span id="packet-provenance"></span></section>
+        <section class="packet-submit"><h3>How to submit · Cómo presentar</h3><p>ÁGORA does not submit for you. Follow the agency's exact instructions below.</p><div id="packet-submission"></div></section>
+        <div class="packet-watermark">DRAFT</div>
+      </article>
     </section>
   </main>
   <footer>Drafts are not legal advice. Petitioning the legislature or an agency is not the practice of law. Never auto-submitted.</footer>

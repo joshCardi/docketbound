@@ -23,6 +23,32 @@ function evaluate(claim) {
 
 function currentClaim() { return state.claims.find((claim) => claim.id === activeClaimId); }
 
+function appendLinkedText(container, text) {
+  container.replaceChildren();
+  const urlPattern = /https:\/\/[^\s]+/g;
+  let cursor = 0;
+  for (const match of text.matchAll(urlPattern)) {
+    container.append(document.createTextNode(text.slice(cursor, match.index)));
+    const trailing = match[0].match(/[.,;)]$/)?.[0] ?? "";
+    const href = trailing ? match[0].slice(0, -1) : match[0];
+    const link = document.createElement("a"); link.href = href; link.textContent = href; link.target = "_blank"; link.rel = "noreferrer";
+    container.append(link);
+    if (trailing) container.append(document.createTextNode(trailing));
+    cursor = match.index + match[0].length;
+  }
+  container.append(document.createTextNode(text.slice(cursor)));
+}
+
+function renderInstructions() {
+  const view = state.fixture.participationPresentation;
+  appendLinkedText($("instructions-intro"), view.intro);
+  $("instructions-methods").replaceChildren(...view.methods.map((method) => {
+    const item = document.createElement("li"); appendLinkedText(item, method); return item;
+  }));
+  appendLinkedText($("instructions-note"), view.instructions);
+  $("instructions-raw").textContent = view.raw;
+}
+
 async function decide(decision) {
   const claim = currentClaim();
   if (decision === "LIMIT") {
@@ -50,6 +76,7 @@ function renderIntake() {
   $("organization-name").textContent = state.intake.organizationName;
   $("demo-disclosure").textContent = state.intake.demoDisclosure;
   $("position").value = state.intake.organizationPosition;
+  $("position-es").value = state.intake.organizationPositionEs;
   $("evidence-count").textContent = `${state.intake.items.length} / 6 approved sources`;
   $("add-evidence").disabled = state.intake.items.length >= 6;
   $("evidence-items").replaceChildren(...state.intake.items.map((item, index) => {
@@ -58,7 +85,7 @@ function renderIntake() {
     row.querySelector('[data-key="sourceName"]').value = item.sourceName;
     row.querySelector('[data-key="owner"]').value = item.owner;
     row.querySelector("select").value = item.language;
-    row.querySelectorAll("input,select").forEach((input) => input.addEventListener("change", () => { state.intake.items[index][input.dataset.key] = input.value; }));
+    row.querySelectorAll("input,select").forEach((input) => input.addEventListener("change", () => { state.intake.items[index][input.dataset.key] = input.value; renderPacket(); }));
     return row;
   }));
 }
@@ -84,17 +111,50 @@ function renderClaims() {
   $("gates").innerHTML = Object.entries(result.gates).map(([name, pass]) => `<div class="gate ${pass ? "pass" : "fail"}"><span>${pass ? "✓" : "×"}</span>${name}</div>`).join("");
   $("diff").hidden = !realDiff(claim);
   if (realDiff(claim)) { $("before").textContent = claim.groundedDiff.before.en; $("after").textContent = claim.groundedDiff.after.en; }
+  renderPacket();
+}
+
+function renderPacket() {
+  if (!state) return;
+  const results = state.claims.map((claim) => ({ claim, result: evaluate(claim) }));
+  const ready = results.every(({ result }) => result.status !== "BLOCKED") && results.some(({ result }) => result.status === "READY FOR HUMAN REVIEW");
+  $("packet-lock").hidden = ready; $("packet").hidden = !ready;
+  if (!ready) return;
+  $("packet-case").textContent = `${state.fixture.docketId} · comments close ${state.fixture.deadline}`;
+  $("packet-organization").textContent = state.intake.organizationName; $("packet-disclosure").textContent = state.intake.demoDisclosure;
+  $("packet-position").textContent = state.intake.organizationPosition;
+  $("packet-position-es").textContent = state.intake.organizationPositionEs;
+  $("packet-claims").replaceChildren(...results.filter(({ result }) => result.status !== "EXCLUDED").map(({ claim, result }) => {
+    const entry = document.createElement("div"); entry.className = `packet-claim ${result.status === "EXCLUDED" ? "packet-excluded" : ""}`;
+    entry.innerHTML = `<div><strong>${claim.id} · ${claim.label}</strong><span>${claim.humanDecision} · ${result.status}</span></div><p class="packet-en"></p><p class="packet-es"></p><small>Source: ${claim.sourceSpan.sourceId} · Owner: ${claim.owner}</small>`;
+    entry.querySelector(".packet-en").textContent = claim.text.en; entry.querySelector(".packet-es").textContent = claim.text.es;
+    return entry;
+  }));
+  $("packet-evidence").replaceChildren(...state.intake.items.map((item) => {
+    const entry = document.createElement("p"); entry.textContent = `${item.sourceId} · ${item.sourceName} · ${item.owner} · ${item.language}`; return entry;
+  }));
+  const excluded = results.filter(({ result }) => result.status === "EXCLUDED").length;
+  $("packet-provenance").textContent = `Frozen fixture ${state.fixture.documentNumber} · raw ADDRESSES span ${state.fixture.sourceSpans.addresses.start}–${state.fixture.sourceSpans.addresses.end} · ${state.intake.items.length} fictional approved evidence records · excluded claims: ${excluded} · new citations introduced: 0`;
+  const submission = $("packet-submission"); submission.replaceChildren(...state.fixture.participationPresentation.methods.map((method) => {
+    const quote = document.createElement("blockquote"); appendLinkedText(quote, method); return quote;
+  }));
 }
 
 function render() {
   const { fixture } = state;
   $("docket").textContent = `${fixture.type} · ${fixture.docketId}`; $("title").textContent = fixture.title; $("agency").textContent = fixture.agency;
-  $("deadline").textContent = fixture.deadline; $("comment-link").href = fixture.commentUrl; $("instructions").textContent = fixture.participationInstructions;
-  renderIntake(); renderClaims();
+  $("deadline").textContent = fixture.deadline; $("comment-link").href = fixture.commentUrl;
+  renderInstructions(); renderIntake(); renderClaims();
 }
 
 $("add-evidence").addEventListener("click", addEvidence);
-$("position").addEventListener("change", (event) => { state.intake.organizationPosition = event.target.value; });
+$("position").addEventListener("change", (event) => { state.intake.organizationPosition = event.target.value; renderPacket(); });
+$("position-es").addEventListener("change", (event) => { state.intake.organizationPositionEs = event.target.value; renderPacket(); });
+$("print-packet").addEventListener("click", () => window.print());
+$("copy-packet").addEventListener("click", async () => {
+  await navigator.clipboard.writeText($("packet").innerText);
+  $("copy-packet").textContent = "Copied";
+});
 try {
   const response = await fetch("/api/fixture/noaa-nmfs-2025-0471");
   if (!response.ok) throw new Error((await response.json()).error);

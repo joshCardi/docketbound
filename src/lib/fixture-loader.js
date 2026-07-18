@@ -23,6 +23,27 @@ function exactSpan(text, startMarker, endMarker) {
   return { start, end, text: text.slice(start, end) };
 }
 
+function faithfulText(raw) {
+  return raw
+    .replace(/<a href="([^"]+)">([^<]+)<\/a>/g, "$2")
+    .replace(/``([^']+)''/g, "“$1”")
+    .replace(/\n\s*/g, " ")
+    .replace(/\s+/g, " ")
+    .replace(/([A-Z0-9])-\s+(?=\d)/g, "$1-")
+    .trim();
+}
+
+export function presentParticipationInstructions(raw) {
+  const [introRaw, electronicRaw = "", mailAndInstructionsRaw = ""] = raw.split(/\s*<bullet>\s*/);
+  const [mailRaw = "", instructionsRaw = ""] = mailAndInstructionsRaw.split(/\s+Instructions:\s*/);
+  return {
+    intro: faithfulText(introRaw).replace(/^ADDRESSES:\s*/, ""),
+    methods: [faithfulText(electronicRaw), faithfulText(mailRaw)].filter(Boolean),
+    instructions: instructionsRaw ? `Instructions: ${faithfulText(instructionsRaw)}` : "",
+    raw
+  };
+}
+
 export async function loadFixture(id = "noaa-nmfs-2025-0471") {
   const config = FIXTURES[id];
   if (!config) throw Object.assign(new Error("Unknown fixture"), { status: 404 });
@@ -56,6 +77,7 @@ export async function loadFixture(id = "noaa-nmfs-2025-0471") {
     deadline: metadata.comments_close_on,
     commentUrl: metadata.regulations_dot_gov_url?.replace(/^http:/, "https:"),
     participationInstructions: addresses.text,
+    participationPresentation: presentParticipationInstructions(addresses.text),
     sourceSpans: {
       deadline: { sourceId: "FR-2026-13808", file: config.fullText, ...deadline },
       addresses: { sourceId: "FR-2026-13808", file: config.fullText, ...addresses },

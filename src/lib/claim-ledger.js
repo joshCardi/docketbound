@@ -116,6 +116,7 @@ export const SEEDED_EVIDENCE_INTAKE = Object.freeze({
   demoDisclosure: "Fictional demo data for evaluation — not a real organization or evidentiary record.",
   isFictionalDemo: true,
   organizationPosition: "Support evidence-based management while protecting small-scale fishing communities from unsupported economic assumptions.",
+  organizationPositionEs: "Apoyar el manejo basado en evidencia mientras se protege a las comunidades pesqueras de pequeña escala frente a supuestos económicos sin fundamento.",
   items: [{
     sourceId: "ORG-01",
     sourceName: "Approved member impact notes",
