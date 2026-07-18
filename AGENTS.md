@@ -29,6 +29,7 @@
 
 ## Commands
 (Fill in as the stack solidifies — keep this section current so any agent session can build/test/run without archaeology.)
-- Dev server: `TBD`
-- Tests / seeded E2E check: `TBD`
+- Dev server: `npm run dev` (http://localhost:3000)
+- Tests / seeded E2E check: `npm test`
+- OpenAI tool-call smoke test: `npm run smoke:openai`
 - Deploy: `TBD`
