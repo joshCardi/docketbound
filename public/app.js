@@ -110,9 +110,9 @@ function renderIntake() {
       if (input.dataset.key === "sourceText") {
         state.intake.items[index].sourceSpan = { ...state.intake.items[index].sourceSpan, start: 0, end: input.value.length, text: input.value };
         state.claims.filter((claim) => claim.sourceSpan.sourceId === item.sourceId).forEach((claim) => { claim.sourceSpan = { ...state.intake.items[index].sourceSpan }; refreshApproval(claim); });
+        renderClaims();
       }
-      else state.intake.items[index][input.dataset.key] = input.value;
-      renderPacket();
+      else { state.intake.items[index][input.dataset.key] = input.value; renderPacket(); }
     }));
     return row;
   }));
