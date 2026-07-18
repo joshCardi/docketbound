@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildDemoClaims, decideClaim, evaluateExport, isRealGroundedDiff, SEEDED_EVIDENCE_INTAKE, SEEDED_LIMIT_REWRITE } from "../src/lib/claim-ledger.js";
+import { buildDemoClaims, createLiveClaim, decideClaim, evaluateExport, isRealGroundedDiff, SEEDED_EVIDENCE_INTAKE, SEEDED_LIMIT_REWRITE } from "../src/lib/claim-ledger.js";
 import { loadFixture } from "../src/lib/fixture-loader.js";
 
 async function claims() { return buildDemoClaims(await loadFixture(), SEEDED_EVIDENCE_INTAKE); }
@@ -23,6 +23,25 @@ test("C-01 visibly progresses BLOCKED to READY on ANSWER", async () => {
   assert.equal(initial.gates.humanDecisionResolved, false);
   assert.equal(initial.gates.groundedDiffComplete, false);
   assert.equal(evaluateExport(decideClaim(claim, "ANSWER")).status, "READY FOR HUMAN REVIEW");
+});
+
+test("creates a live claim bound to an approved intake span and existing gates", () => {
+  const claim = createLiveClaim({
+    id: "C-LIVE-ABC123", intake: SEEDED_EVIDENCE_INTAKE,
+    submission: { title: "Documented operating concerns", label: "E", en: "Members reported operating concerns.", es: "Los miembros informaron preocupaciones operacionales.", sourceId: "ORG-01" },
+    adversarialQuestion: "Does ORG-01 support a claim beyond the reporting members?"
+  });
+  assert.equal(claim.sourceSpan.text, SEEDED_EVIDENCE_INTAKE.items[0].sourceSpan.text);
+  assert.equal(claim.sourceSpan.end, claim.sourceSpan.text.length);
+  assert.equal(claim.humanDecision, "UNRESOLVED");
+  assert.equal(evaluateExport(claim).status, "BLOCKED");
+  assert.equal(evaluateExport(decideClaim(claim, "ANSWER")).status, "READY FOR HUMAN REVIEW");
+});
+
+test("rejects live claims with model-originated sources or bilingual number drift", () => {
+  const base = { id: "C-LIVE-ABC123", intake: SEEDED_EVIDENCE_INTAKE, adversarialQuestion: "What supports this?" };
+  assert.throws(() => createLiveClaim({ ...base, submission: { title: "Bad", label: "E", en: "Claim", es: "Afirmación", sourceId: "MODEL-01" } }), /approved evidence/);
+  assert.throws(() => createLiveClaim({ ...base, submission: { title: "Drift", label: "I", en: "Costs rose 10 percent.", es: "Los costos aumentaron.", sourceId: "ORG-01" } }), /dates\/numbers/);
 });
 
 test("C-02 LIMIT requires and records a real bilingual rewrite", async () => {

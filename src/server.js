@@ -6,6 +6,7 @@ import { loadEnvFile } from "node:process";
 import { loadFixture } from "./lib/fixture-loader.js";
 import { buildDemoClaims, decideClaim, evaluateExport, isRealGroundedDiff, SEEDED_EVIDENCE_INTAKE } from "./lib/claim-ledger.js";
 import { runToolLoop } from "./lib/openai-client.js";
+import { generateLiveClaim, validateIntake } from "./lib/live-claim.js";
 import { clientIp, createHourlyIpRateLimiter, RATE_LIMIT_MESSAGE } from "./lib/rate-limit.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -93,12 +94,24 @@ const server = createServer(async (req, res) => {
       const claims = buildDemoClaims(fixture, SEEDED_EVIDENCE_INTAKE);
       return json(res, 200, { fixture, intake: SEEDED_EVIDENCE_INTAKE, claims, exports: Object.fromEntries(claims.map((claim) => [claim.id, evaluateExport(claim)])) });
     }
-    if (req.method === "POST" && url.pathname === "/api/claims/C-02/limit") {
+    if (req.method === "POST" && url.pathname === "/api/claims/generate") {
+      if (!enforceGptRateLimit(req, res)) return;
+      const body = await readJson(req);
+      return json(res, 201, await generateLiveClaim(validateIntake(body.intake)));
+    }
+    const limitMatch = req.method === "POST" && url.pathname.match(/^\/api\/claims\/([^/]+)\/limit$/);
+    if (limitMatch) {
       if (!enforceGptRateLimit(req, res)) return;
       const fixture = await loadFixture();
       const body = await readJson(req);
-      const intake = body.intake ?? SEEDED_EVIDENCE_INTAKE;
-      const claim = buildDemoClaims(fixture, intake).find((item) => item.id === "C-02");
+      const intake = validateIntake(body.intake ?? SEEDED_EVIDENCE_INTAKE);
+      let claim = buildDemoClaims(fixture, intake).find((item) => item.id === limitMatch[1]);
+      if (!claim && body.claim?.id === limitMatch[1]) {
+        const evidence = intake.items.find((item) => item.sourceId === body.claim.sourceSpan?.sourceId);
+        if (!evidence) throw Object.assign(new Error("Claim source is not approved for this intake"), { status: 400 });
+        claim = { ...body.claim, sourceSpan: evidence.sourceSpan, owner: evidence.owner, approvedSourceIds: [evidence.sourceId], citationSourceIds: [evidence.sourceId] };
+      }
+      if (!claim) throw Object.assign(new Error("Claim not found"), { status: 404 });
       return json(res, 200, await generateLimitedClaim(claim, intake));
     }
     const requested = url.pathname === "/" ? "index.html" : url.pathname.slice(1);

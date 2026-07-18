@@ -94,6 +94,34 @@ export function buildDemoClaims(fixture, approvedEvidence) {
   ];
 }
 
+export function createLiveClaim({ id, intake, submission, adversarialQuestion }) {
+  if (!/^C-LIVE-[A-Z0-9]{6}$/.test(id)) throw new Error("Invalid live claim id");
+  if (!CLAIM_LABELS.includes(submission?.label)) throw new Error("Invalid E/I/A/R label");
+  if (!submission?.title || !submission?.en || !submission?.es) throw new Error("Live claim must be titled and bilingual");
+  if (!adversarialQuestion?.trim()) throw new Error("Live claim requires an adversarial question");
+  const evidence = intake.items.find((item) => item.sourceId === submission.sourceId);
+  if (!evidence?.sourceSpan?.text?.trim()) throw new Error("Live claim source must be approved evidence with an exact span");
+  const sourceSpan = {
+    ...evidence.sourceSpan,
+    sourceId: evidence.sourceId,
+    start: 0,
+    end: evidence.sourceSpan.text.length
+  };
+  const claim = baseClaim({
+    id,
+    claim: submission.title,
+    label: submission.label,
+    text: { en: submission.en, es: submission.es },
+    sourceSpan,
+    approvedSourceIds: [evidence.sourceId],
+    adversarialQuestion: adversarialQuestion.trim(),
+    evidenceStatus: "SUPPORTED"
+  });
+  claim.owner = evidence.owner;
+  if (!datesAndNumbersPreserved(claim)) throw new Error("Live claim failed bilingual dates/numbers preservation");
+  return claim;
+}
+
 export function decideClaim(claim, decision, groundedRewrite = null) {
   if (!HUMAN_DECISIONS.includes(decision)) throw new Error("Invalid human decision");
   const next = { ...claim, humanDecision: decision, groundedDiff: null };
