@@ -49,6 +49,8 @@ npm run smoke:openai
 
 The app intentionally has no frontend build step. It uses a thin Node HTTP backend, vanilla browser modules, and Node's built-in test runner. The `.env` file and other secret-bearing local files are ignored by Git.
 
+The public sandbox limits GPT-backed HTTP operations to 10 calls per client IP in a rolling hour. Set `TRUST_PROXY=1` only when deployment is behind a trusted reverse proxy that supplies `X-Forwarded-For`; local development defaults to `0`.
+
 ## Demo walkthrough
 
 1. Confirm the header identifies NOAA, the proposed rule, the comment deadline, the neutral days-remaining chip, and the official participation portal.
@@ -75,6 +77,14 @@ In the current demo:
 - `LIMIT` calls an approved-evidence tool, then requires GPT-5.6 to submit a typed bilingual grounded rewrite;
 - the application rejects the rewrite unless it is materially different and passes the no-new-citations and bilingual dates/numbers gates.
 
+Runtime responsibility is deliberately explicit:
+
+| Operation | GPT-5.6 role | Tonight's demo status |
+| --- | --- | --- |
+| Claim generation | Generate a bilingual material claim only after reading permissible evidence tools. | The two claims are frozen for a repeatable seeded walkthrough. |
+| Adversarial review | Ask the one question most capable of breaking the material claim, using the same bound record. | The two review questions are frozen with the seeded claims. |
+| Grounded diff | On human `LIMIT`, read approved evidence and submit a typed bilingual narrowing. | Live through the Responses API and mechanically gated. |
+
 Citations never originate from model prose. Permissible sources are limited to the frozen fixture, organization-approved evidence, and—when later activated by relevance—real corpus results.
 
 ## Evidence integrity and human authority
@@ -93,7 +103,7 @@ This repository was built in one primary Codex collaboration thread for OpenAI B
 
 **Where Codex accelerated the work:** Codex translated the frozen specification into the minimal Node/vanilla scaffold; implemented the fixture adapter, exact-span binding, claim ledger, decision state machine, mechanical gates, GPT-5.6 Responses tool loop, evidence intake, faithful instructions renderer, and printable packet; wrote regression tests; and repeatedly self-QA'd the real browser flow with Playwright. That browser QA caught concrete defects—including a misleading READY state for rejected claims, an identical before/after diff, a packet visibility bug, and excluded claims leaking into the packet—before handoff.
 
-**Where the human made the product and legal decisions:** Josué Cardona, the product owner and a licensed attorney, authored and froze the product specification; defined the Deadline-to-Defense winning beat; chose the scope cuts; required a single orchestrator rather than multi-agent theater; defined `ANSWER / LIMIT / REJECT / UNRESOLVED` semantics; required `EXCLUDED` for rejected claims; set the evidence, provenance, bilingual-integrity, citation, legal-safety, and human-authority rules; selected the demo contrast; and reviewed the product in the browser. Codex implemented within those decisions rather than expanding product scope.
+**Where the human made the product and legal decisions:** Josué Cardona, the product owner and a licensed attorney, authored and froze the product specification; defined the Deadline-to-Defense winning beat; chose the scope cuts; required a single orchestrator rather than multi-agent theater; defined `ANSWER / LIMIT / REJECT / UNRESOLVED` semantics; required `EXCLUDED` for rejected claims; set the evidence, provenance, bilingual-integrity, citation, legal-safety, human-authority, and fictional-data disclosure rules; selected the demo contrast; and reviewed the product in the browser. Codex implemented within those decisions rather than expanding product scope.
 
 Commit history is intentionally small, frequent, and dated as evidence of the collaboration during the submission window.
 
@@ -111,3 +121,7 @@ Tests:                       npm test
 GPT-5.6 tool smoke test:     npm run smoke:openai
 Deployment:                  TBD
 ```
+
+## License
+
+ÁGORA is available under the [MIT License](LICENSE). Copyright 2026 Josué R. Cardona Hernández.
