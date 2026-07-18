@@ -1,11 +1,11 @@
-# ÁGORA — Product Spec v2.0 (FINAL · FROZEN)
+# DOCKETBOUND — Product Spec v2.0 (FINAL · FROZEN)
 ### OpenAI Build Week · Track: Work & Productivity · Deadline: Tue Jul 21, 5:00 PM PT
 **Everything that does not strengthen `verified docket → challenged claim → human decision → grounded diff` gets amputated.**
 
 ## Brand architecture (visible vs internal)
-- **Visible brand:** ÁGORA · Descriptor: **Evidence-Bound Public Participation** · Visible loop: **Deadline-to-Defense**
+- **Visible brand:** DOCKETBOUND · Descriptor: **Evidence-Bound Public Participation** · Visible loop: **Deadline-to-Defense**
 - **Internal only** (never in pitch): La Prueba (verifier) · Ponencia Loop (disclosed pre-existing baseline) · Motor de Cruces (conditional adapter) · Codex build loops
-- **Video one-liner:** *"ÁGORA turns a public docket and an organization's approved evidence into a bilingual participation packet — then stress-tests its weakest claim before a human approves it."*
+- **Video one-liner:** *"DocketBound turns a public docket and an organization's approved evidence into a bilingual participation packet — then stress-tests its weakest claim before a human approves it."*
 - **Closing line:** *"Evidence can cross language. Authority stays human."*
 
 ## Golden path (FROZEN — 10 steps, this IS the demo)
@@ -50,11 +50,11 @@ Controlled repo · `PRIOR_WORK.md` (disclosed baseline) · frozen official fixtu
 Citation graph (31K edges) — only if a material claim demands PR jurisprudence · five-agent panel · Viability/Intaker merge (Act 2) · auth/dashboard/history · live SUTRA/congress.gov/regulations.gov ingestion · PDF polish · payments. Codex loops (planning/build/product/evidence/competition) = internal harness, never UI.
 
 ## Founder story (video open, 0:00–0:12) then product, no résumé
-*"I'm Josué Cardona, an attorney and former Assistant Secretary for Administration at the Puerto Rico Department of Treasury. I've worked where public decisions, institutional evidence and accountability converge. ÁGORA helps smaller organizations enter that process without surrendering their voice to the model."*
-Impact framing: *"ÁGORA does not speak for communities. It helps their evidence survive the process."*
+*"I'm Josué Cardona, an attorney and former Assistant Secretary for Administration at the Puerto Rico Department of Treasury. I've worked where public decisions, institutional evidence and accountability converge. DocketBound helps smaller organizations enter that process without surrendering their voice to the model."*
+Impact framing: *"DocketBound does not speak for communities. It helps their evidence survive the process."*
 
 ## Compliance (unchanged, hackathon-critical)
-All submission materials in English (product bilingual = feature) · UPL-safe (petitioning ≠ practice of law; DRAFT watermark; conditioned export) · public demo instance, seeded, rate-limited · no secrets in repo · one master Codex thread (AGORA-CORE) = `/feedback` Session ID source · small dated commits.
+All submission materials in English (product bilingual = feature) · UPL-safe (petitioning ≠ practice of law; DRAFT watermark; conditioned export) · public demo instance, seeded, rate-limited · no secrets in repo · one master Codex thread (DOCKETBOUND-CORE) = `/feedback` Session ID source · small dated commits.
 
 ## Score honesty
 9.1 = ceiling after gates. Realized expectation ≈ 8.5–8.7 with normal slippage. The climb to 9 comes from the winning beat landing — not from adding intelligence.

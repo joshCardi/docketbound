@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ÁGORA · Deadline-to-Defense</title>
+  <title>DOCKETBOUND · Deadline-to-Defense</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <header class="topbar"><div><strong>ÁGORA</strong><span>Evidence-Bound Public Participation</span></div><button id="language">ES</button></header>
+  <header class="topbar"><div><strong>DOCKETBOUND</strong><span>Evidence-Bound Public Participation</span></div><button id="language">ES</button></header>
   <main>
     <section id="loading" class="panel">Loading frozen docket…</section>
     <section id="app" hidden>
@@ -44,20 +44,22 @@
         </section>
         <aside class="panel defense">
           <h2>Defense status</h2><div id="status" class="status blocked"></div><p id="journey" class="journey"></p><div id="gates"></div>
+          <p id="decision-binding" class="decision-binding"></p>
           <div id="diff" hidden><h3>Grounded diff</h3><p class="removed" id="before"></p><p class="added" id="after"></p></div>
           <p class="watermark">DRAFT</p>
         </aside>
       </div>
       <section id="packet-lock" class="panel packet-lock"><strong>Participation packet · BLOCKED</strong><span>Resolve or exclude every claim before rendering the packet.</span></section>
       <article id="packet" class="panel packet" hidden>
-        <header><div><span class="packet-brand">ÁGORA</span><h2>Bilingual Participation Packet</h2><p id="packet-case"></p></div><div><span class="packet-status">READY FOR HUMAN REVIEW</span><button id="copy-packet">Copy</button><button id="print-packet">Print</button></div></header>
+        <header><div><span class="packet-brand">DOCKETBOUND</span><h2>Bilingual Participation Packet</h2><p id="packet-case"></p></div><div><span class="packet-status">READY FOR HUMAN REVIEW</span><button id="copy-packet">Copy</button><button id="print-packet">Print</button></div></header>
         <div class="packet-demo"><strong id="packet-organization"></strong><span id="packet-disclosure"></span></div>
         <section><h3>Organization position · Posición de la organización</h3><p id="packet-position"></p><p class="packet-es" id="packet-position-es"></p></section>
         <section><h3>Claims ledger · Registro de afirmaciones</h3><div id="packet-claims"></div></section>
         <section><h3>Approved evidence · Evidencia aprobada</h3><div id="packet-evidence"></div></section>
         <section class="provenance-seal"><strong>PROVENANCE SEALED</strong><span id="packet-provenance"></span></section>
-        <section class="packet-submit"><h3>How to submit · Cómo presentar</h3><p>ÁGORA does not submit for you. Follow the agency's exact instructions below.</p><div id="packet-submission"></div></section>
         <div class="packet-watermark">DRAFT</div>
+        <section class="packet-submit"><h3>How to submit · Cómo presentar</h3><p>DocketBound does not submit for you. Follow the agency's exact instructions below.</p><div id="packet-submission"></div></section>
+        <section class="packet-manifest"><h3>Export manifest</h3><pre id="packet-manifest">Generating cryptographic manifest…</pre></section>
       </article>
     </section>
   </main>

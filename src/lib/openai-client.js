@@ -1,6 +1,6 @@
 const RESPONSES_URL = "https://api.openai.com/v1/responses";
 
-export const AGORA_MODEL = "gpt-5.6";
+export const DOCKETBOUND_MODEL = "gpt-5.6";
 
 export function responseText(response) {
   return (response.output ?? [])
@@ -27,7 +27,7 @@ async function createResponse(body, apiKey = process.env.OPENAI_API_KEY) {
   return response.json();
 }
 
-export async function runToolLoop({ input, instructions, tools, handlers, model = AGORA_MODEL }) {
+export async function runToolLoop({ input, instructions, tools, handlers, model = DOCKETBOUND_MODEL }) {
   let response = await createResponse({ model, instructions, input, tools });
   let toolCalls = 0;
 

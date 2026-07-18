@@ -1,8 +1,8 @@
-# AGENTS.md — ÁGORA
+# AGENTS.md — DOCKETBOUND
 ### Guidance for coding agents working in this repository
 
 ## What this project is
-ÁGORA: an agent that interviews a citizen/community org about a live Puerto Rico bill, teaches them what it does to them, and produces verified, citation-gated legislative testimony (ponencia). Built for OpenAI Build Week (deadline Tue Jul 21, 5:00 PM PT). Track: Work & Productivity. Full product spec: `SPEC.md` (FROZEN — do not expand scope).
+DocketBound: an agent that interviews a citizen/community org about a live Puerto Rico bill, teaches them what it does to them, and produces verified, citation-gated legislative testimony (ponencia). Built for OpenAI Build Week (deadline Tue Jul 21, 5:00 PM PT). Track: Work & Productivity. Full product spec: `SPEC.md` (FROZEN — do not expand scope).
 
 ## Architecture rules
 - **Minimal harness:** one agent loop + tool calls. Do not add subagents, planners, or orchestration layers. If a step can be a tool call, it is a tool call.
@@ -22,7 +22,7 @@
 - The seeded demo case (PC1213) must run end-to-end at all times after Sunday. If a change breaks the seeded flow, fixing it takes priority over any new work.
 
 ## Compliance (hackathon-critical)
-- Majority of core functionality is built in the single main Codex thread ("AGORA-CORE"); its `/feedback` Session ID is submitted.
+- Majority of core functionality is built in the single main Codex thread ("DOCKETBOUND-CORE"); its `/feedback` Session ID is submitted.
 - README must narrate the Codex collaboration: where Codex accelerated, where the human made product/engineering decisions, how GPT-5.6 is used at runtime.
 - Judges must be able to test without rebuilding: keep the public demo instance working and the README run instructions accurate.
 - Visible disclaimer: drafts are not legal advice; petitioning the legislature is not the practice of law; DRAFT watermark on output.

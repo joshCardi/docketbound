@@ -1,5 +1,5 @@
 # Frozen Fixture — NOAA-NMFS-2025-0471 · FR Doc 2026-13808
-### ÁGORA primary demo case · FROZEN — the demo reads ONLY from this snapshot, never live
+### DocketBound primary demo case · FROZEN — the demo reads ONLY from this snapshot, never live
 
 ## Verified identity (extracted from official raw snapshot, cross-checked)
 - **Title:** Fisheries of the Caribbean, Gulf of America, and South Atlantic; **Puerto Rico Fishery Management Plan; Amendment 4**

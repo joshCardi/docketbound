@@ -1,10 +1,10 @@
-# ÁGORA · Evidence-Bound Public Participation
+# DOCKETBOUND · Evidence-Bound Public Participation
 
 > **Review draft:** The product owner will personally review and edit this README before submission.
 
-ÁGORA helps a citizen or community organization understand a live public proceeding, develop a bilingual participation packet from evidence it has approved, and stress-test the packet's most material claim before a human authorizes any change.
+DocketBound helps a citizen or community organization understand a live public proceeding, develop a bilingual participation packet from evidence it has approved, and stress-test the packet's most material claim before a human authorizes any change.
 
-Its visible workflow is **Deadline-to-Defense**: verified docket → challenged claim → human decision → grounded diff. ÁGORA does not speak for communities and never submits on their behalf. Export means **READY FOR HUMAN REVIEW**, not filed or approved. Every output remains visibly marked **DRAFT**.
+Its visible workflow is **Deadline-to-Defense**: verified docket → challenged claim → human decision → grounded diff. DocketBound does not speak for communities and never submits on their behalf. Export means **READY FOR HUMAN REVIEW**, not filed or approved. Every output remains visibly marked **DRAFT**.
 
 The current Build Week demo uses a hand-verified frozen snapshot of NOAA docket `NOAA-NMFS-2025-0471`. The seeded organization and organization evidence are visibly identified as fictional evaluation data. The official docket snapshot is real; the demo reads it only from `fixtures/noaa-nmfs-2025-0471/raw/` and performs no live docket ingestion.
 
@@ -21,7 +21,7 @@ The current Build Week demo uses a hand-verified frozen snapshot of NOAA docket 
 9. Mechanically reject new citations and verify that dates and numbers survive across languages.
 10. Render a bilingual participation packet only when the included claims are **READY FOR HUMAN REVIEW**.
 
-`REJECT` is a terminal `EXCLUDED` state: that claim does not enter the packet. `UNRESOLVED` keeps export blocked. ÁGORA never auto-submits.
+`REJECT` is a terminal `EXCLUDED` state: that claim does not enter the packet. `UNRESOLVED` keeps export blocked. DocketBound never auto-submits.
 
 ## Local development
 
@@ -60,7 +60,7 @@ The public sandbox limits GPT-backed HTTP operations to 10 calls per client IP i
 5. Open **C-02 · NEEDS EVIDENCE**. It overstates the seeded organization evidence as an island-wide fiscal effect. The adversarial question exposes the unsupported geographic scope, so export remains `BLOCKED`.
 6. Select `LIMIT`. GPT-5.6 reads only the approved evidence through a tool and rewrites the claim around reported impacts in three coastal municipalities. The before/after text visibly changes.
 7. Confirm: source bound, new citations introduced `0`, dates/numbers preserved, human decision `LIMIT`, and export `READY FOR HUMAN REVIEW`.
-8. Review the now-visible bilingual packet. It includes the fictional-data disclosure, included claims and decisions, approved evidence, provenance seal, DRAFT watermark, and the exact portal/docket and mail instructions at the end. Copy or print it; ÁGORA does not submit it.
+8. Review the now-visible bilingual packet. It includes the fictional-data disclosure, included claims and decisions, approved evidence, provenance seal, DRAFT watermark, and the exact portal/docket and mail instructions at the end. Copy or print it; DocketBound does not submit it.
 
 For contrast, selecting `REJECT` on a claim produces `EXCLUDED` and removes it from the packet rather than falsely marking it ready.
 
@@ -70,7 +70,7 @@ Edit the organization position and the exact permissible evidence text, then sel
 
 ## Runtime architecture and GPT-5.6
 
-ÁGORA follows a deliberately small architecture: **one GPT-5.6 orchestrator, programmatic tool calls, one internal adversarial review operation, a claim ledger, and mechanical export gates**. There is no visible multi-agent panel, planner hierarchy, authentication system, dashboard, history view, or live-ingestion pipeline.
+DocketBound follows a deliberately small architecture: **one GPT-5.6 orchestrator, programmatic tool calls, one internal adversarial review operation, a claim ledger, and mechanical export gates**. There is no visible multi-agent panel, planner hierarchy, authentication system, dashboard, history view, or live-ingestion pipeline.
 
 The runtime uses the OpenAI **Responses API** with model alias `gpt-5.6`. GPT-5.6 runs live claim generation, adversarial review, and grounded diff; tool calls are the only path by which frozen fixture facts and approved organization evidence may enter those operations. The two seeded claims retain frozen questions only as a deterministic evaluation walkthrough. New claims execute generation and review live inside the same single orchestrator loop—not a separate agent.
 
@@ -98,9 +98,11 @@ The claim ledger is the product spine. Each claim carries:
 
 `claim · E/I/A/R label · exact source span · owner · language · human decision`
 
-Packet rendering is conditioned on state and gates. ÁGORA may challenge or narrow language, but it cannot silently change the organization's position. Human authority remains visible at the decision point and in the final ledger.
+Packet rendering is conditioned on state and gates. DocketBound may challenge or narrow language, but it cannot silently change the organization's position. Human authority remains visible at the decision point and in the final ledger.
 
 The generated packet is not legal advice. Petitioning an agency or legislature is not presented as the practice of law. All output is a draft for human review.
+
+P1 TODO: extend bilingual parity beyond dates and numbers with source-aware checks for geographic scope, causality strength, certainty/modals, and affected population. This remains explicit follow-on work; the current gate does not claim to detect those semantic divergences.
 
 ## Codex collaboration
 
@@ -114,7 +116,7 @@ Commit history is intentionally small, frequent, and dated as evidence of the co
 
 ## Prior work and roadmap
 
-The pre-existing Ponencia Loop baseline and external data primitives are disclosed in [PRIOR_WORK.md](PRIOR_WORK.md). They are not claimed as newly built Build Week functionality, and the baseline's legacy non-OpenAI generation layer is not part of ÁGORA's runtime.
+The pre-existing Ponencia Loop baseline and external data primitives are disclosed in [PRIOR_WORK.md](PRIOR_WORK.md). They are not claimed as newly built Build Week functionality, and the baseline's legacy non-OpenAI generation layer is not part of DocketBound's runtime.
 
 Roadmap—not part of the frozen demo scope: the **Jurisdictional Impact Map** will act as a conditional corpus router from docket → agency authority → operative requirements → affected groups → deadline → evidentiary questions. Puerto Rico jurisprudence and other corpus tools will activate only when materially relevant to a claim. Relevance, not exhibition, governs that path.
 
@@ -129,4 +131,6 @@ Deployment:                  TBD
 
 ## License
 
-ÁGORA is available under the [MIT License](LICENSE). Copyright 2026 Josué R. Cardona Hernández.
+DocketBound is available under the [MIT License](LICENSE). Copyright 2026 Josué R. Cardona Hernández.
+
+Product: [docketbound.com](https://docketbound.com) · Source: [github.com/joshCardi/docketbound](https://github.com/joshCardi/docketbound)
