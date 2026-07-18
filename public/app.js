@@ -3,6 +3,7 @@ let state;
 let activeClaimId = "C-01";
 const $ = (id) => document.getElementById(id);
 const numberTokens = (value) => value.match(/\b\d[\d,.]*\b|\b\d{4}-\d{2}-\d{2}\b/g) ?? [];
+const LABEL_NAMES = { E: "EVIDENCE", I: "INFERENCE", A: "ASSERTION", R: "RECOMMENDATION" };
 
 function realDiff(claim) {
   return Boolean(claim.groundedDiff && claim.groundedDiff.before.en !== claim.groundedDiff.after.en && claim.groundedDiff.before.es !== claim.groundedDiff.after.es);
@@ -54,7 +55,7 @@ async function decide(decision) {
   if (decision === "LIMIT") {
     setBusy(true, "GPT-5.6 is narrowing within approved evidence…");
     try {
-      const response = await fetch(`/api/claims/${claim.id}/limit`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ intake: state.intake }) });
+      const response = await fetch(`/api/claims/${claim.id}/limit`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ intake: state.intake, claim }) });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error);
       Object.assign(claim, result.claim);
@@ -81,13 +82,32 @@ function renderIntake() {
   $("add-evidence").disabled = state.intake.items.length >= 6;
   $("evidence-items").replaceChildren(...state.intake.items.map((item, index) => {
     const row = document.createElement("div"); row.className = "evidence-row";
-    row.innerHTML = `<span class="approved">APPROVED</span><label>Source name<input data-key="sourceName"></label><label>Owner<input data-key="owner"></label><label>Language<select data-key="language"><option>English</option><option>Spanish</option><option>bilingual</option></select></label>`;
+    row.innerHTML = `<span class="approved">APPROVED</span><label>Source name<input data-key="sourceName"></label><label>Owner<input data-key="owner"></label><label>Language<select data-key="language"><option>English</option><option>Spanish</option><option>bilingual</option></select></label><label class="evidence-text">Approved evidence text · exact permissible span<textarea data-key="sourceText" rows="3"></textarea></label>`;
     row.querySelector('[data-key="sourceName"]').value = item.sourceName;
     row.querySelector('[data-key="owner"]').value = item.owner;
     row.querySelector("select").value = item.language;
-    row.querySelectorAll("input,select").forEach((input) => input.addEventListener("change", () => { state.intake.items[index][input.dataset.key] = input.value; renderPacket(); }));
+    row.querySelector('[data-key="sourceText"]').value = item.sourceSpan.text;
+    row.querySelectorAll("input,select,textarea").forEach((input) => input.addEventListener("change", () => {
+      if (input.dataset.key === "sourceText") state.intake.items[index].sourceSpan = { ...state.intake.items[index].sourceSpan, start: 0, end: input.value.length, text: input.value };
+      else state.intake.items[index][input.dataset.key] = input.value;
+      renderPacket();
+    }));
     return row;
   }));
+}
+
+async function generateLiveClaim() {
+  const button = $("generate-claim"); button.disabled = true;
+  $("generate-status").textContent = "GPT-5.6 is reading approved sources and reviewing one new claim…";
+  try {
+    const response = await fetch("/api/claims/generate", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ intake: state.intake }) });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error);
+    state.claims.push(result.claim); activeClaimId = result.claim.id;
+    $("generate-status").textContent = `${result.claim.id} created · BLOCKED pending human decision`;
+    renderClaims();
+  } catch (error) { $("generate-status").textContent = error.message; }
+  finally { button.disabled = false; }
 }
 
 function addEvidence() {
@@ -100,7 +120,7 @@ function addEvidence() {
 function renderClaims() {
   const claim = currentClaim();
   $("claim-tabs").replaceChildren(...state.claims.map((item) => Object.assign(document.createElement("button"), { className: item.id === activeClaimId ? "active" : "", textContent: `${item.id} · ${item.evidenceStatus}`, onclick: () => { activeClaimId = item.id; renderClaims(); } })));
-  $("claim-id").textContent = claim.id; $("claim-label").textContent = `${claim.label} · ${claim.label === "E" ? "EVIDENCE" : "INFERENCE"}`;
+  $("claim-id").textContent = claim.id; $("claim-label").textContent = `${claim.label} · ${LABEL_NAMES[claim.label] ?? "CLAIM"}`;
   $("evidence-state").textContent = claim.evidenceStatus; $("evidence-state").className = `evidence-state ${claim.evidenceStatus.includes("NEEDS") ? "needs" : "supported"}`;
   $("claim-en").textContent = claim.text.en; $("claim-es").textContent = claim.text.es;
   $("source-id").textContent = `Source ${claim.sourceSpan.sourceId}`; $("source-range").textContent = `characters ${claim.sourceSpan.start}–${claim.sourceSpan.end}`;
@@ -149,6 +169,7 @@ function render() {
 }
 
 $("add-evidence").addEventListener("click", addEvidence);
+$("generate-claim").addEventListener("click", generateLiveClaim);
 $("position").addEventListener("change", (event) => { state.intake.organizationPosition = event.target.value; renderPacket(); });
 $("position-es").addEventListener("change", (event) => { state.intake.organizationPositionEs = event.target.value; renderPacket(); });
 $("print-packet").addEventListener("click", () => window.print());

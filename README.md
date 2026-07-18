@@ -64,16 +64,21 @@ The public sandbox limits GPT-backed HTTP operations to 10 calls per client IP i
 
 For contrast, selecting `REJECT` on a claim produces `EXCLUDED` and removes it from the packet rather than falsely marking it ready.
 
+### Live mode
+
+Edit the organization position and the exact permissible evidence text, then select **Generate new live claim with GPT-5.6**. One evidence-bound tool loop reads only those approved sources, creates one bilingual material claim with an E/I/A/R label, binds it server-side to the selected stored span, and generates the adversarial question live. The new `C-LIVE-*` claim enters the same ledger as C-01 and C-02 at `UNRESOLVED · BLOCKED`, with the same human decisions, grounded-diff path, gates, packet rules, and per-IP rate limit. The two seeded claims remain unchanged as the stable evaluation walkthrough.
+
 ## Runtime architecture and GPT-5.6
 
 ÁGORA follows a deliberately small architecture: **one GPT-5.6 orchestrator, programmatic tool calls, one internal adversarial review operation, a claim ledger, and mechanical export gates**. There is no visible multi-agent panel, planner hierarchy, authentication system, dashboard, history view, or live-ingestion pipeline.
 
-The runtime uses the OpenAI **Responses API** with model alias `gpt-5.6`. GPT-5.6 is the designated runtime engine for challenge, internal review, and grounded diff; tool calls are the only path by which frozen fixture facts and approved organization evidence may enter those operations. In tonight's navigable skeleton, the adversarial questions are frozen with the two seeded claims for a deterministic walkthrough, while the `LIMIT` grounded diff already executes as a live GPT-5.6 tool loop. Moving challenge generation into that same evidence-bound loop is the next implementation step, not a separate agent.
+The runtime uses the OpenAI **Responses API** with model alias `gpt-5.6`. GPT-5.6 runs live claim generation, adversarial review, and grounded diff; tool calls are the only path by which frozen fixture facts and approved organization evidence may enter those operations. The two seeded claims retain frozen questions only as a deterministic evaluation walkthrough. New claims execute generation and review live inside the same single orchestrator loop—not a separate agent.
 
 In the current demo:
 
 - the fixture reader proves GPT-5.6 tool plumbing;
-- the seeded adversarial question exposes the single internal review step without adding a visible persona or panel;
+- live mode generates both a typed bilingual claim and the one adversarial question that can most materially break it;
+- the seeded adversarial questions preserve the stable C-01/C-02 walkthrough without adding a visible persona or panel;
 - `LIMIT` calls an approved-evidence tool, then requires GPT-5.6 to submit a typed bilingual grounded rewrite;
 - the application rejects the rewrite unless it is materially different and passes the no-new-citations and bilingual dates/numbers gates.
 
@@ -81,8 +86,8 @@ Runtime responsibility is deliberately explicit:
 
 | Operation | GPT-5.6 role | Tonight's demo status |
 | --- | --- | --- |
-| Claim generation | Generate a bilingual material claim only after reading permissible evidence tools. | The two claims are frozen for a repeatable seeded walkthrough. |
-| Adversarial review | Ask the one question most capable of breaking the material claim, using the same bound record. | The two review questions are frozen with the seeded claims. |
+| Claim generation | Generate a bilingual material claim only after reading permissible evidence tools. | Live for new `C-LIVE-*` claims; C-01/C-02 remain frozen walkthrough fixtures. |
+| Adversarial review | Ask the one question most capable of breaking the material claim, using the same bound record. | Live for new claims in the same tool loop; seeded questions remain stable. |
 | Grounded diff | On human `LIMIT`, read approved evidence and submit a typed bilingual narrowing. | Live through the Responses API and mechanically gated. |
 
 Citations never originate from model prose. Permissible sources are limited to the frozen fixture, organization-approved evidence, and—when later activated by relevance—real corpus results.
