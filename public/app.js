@@ -143,7 +143,8 @@ function renderPacket() {
 function render() {
   const { fixture } = state;
   $("docket").textContent = `${fixture.type} · ${fixture.docketId}`; $("title").textContent = fixture.title; $("agency").textContent = fixture.agency;
-  $("deadline").textContent = fixture.deadline; $("comment-link").href = fixture.commentUrl;
+  const dayLabel = fixture.daysLeftToComment === 1 ? "day" : "days";
+  $("deadline").textContent = fixture.deadline; $("countdown").textContent = `${fixture.daysLeftToComment} ${dayLabel} left to comment`; $("comment-link").href = fixture.commentUrl;
   renderInstructions(); renderIntake(); renderClaims();
 }
 

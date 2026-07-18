@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { loadFixture, presentParticipationInstructions } from "../src/lib/fixture-loader.js";
+import { daysUntilDate, loadFixture, presentParticipationInstructions } from "../src/lib/fixture-loader.js";
 
 test("loads NOAA deadline and participation instructions from frozen raw sources", async () => {
   const fixture = await loadFixture();
@@ -16,6 +16,11 @@ test("loads NOAA deadline and participation instructions from frozen raw sources
   assert.match(fixture.participationPresentation.methods[1], /263 13th Avenue South/);
   const { raw, ...rendered } = fixture.participationPresentation;
   assert.doesNotMatch(JSON.stringify(rendered), /<bullet>|<a href|``/);
+});
+
+test("computes a neutral calendar-day deadline countdown", () => {
+  assert.equal(daysUntilDate("2026-08-07", new Date(2026, 6, 18, 23, 59)), 20);
+  assert.equal(daysUntilDate("2026-08-07", new Date(2026, 7, 8)), 0);
 });
 
 test("faithful presentation changes markup only, not the bound raw span", () => {

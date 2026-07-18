@@ -14,6 +14,13 @@ export const FIXTURES = Object.freeze({
   pc1213: { kind: "puerto-rico-bill", unavailable: true }
 });
 
+export function daysUntilDate(date, now = new Date()) {
+  const [year, month, day] = date.split("-").map(Number);
+  const deadlineUtc = Date.UTC(year, month - 1, day);
+  const todayUtc = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  return Math.max(0, Math.ceil((deadlineUtc - todayUtc) / 86_400_000));
+}
+
 function exactSpan(text, startMarker, endMarker) {
   const start = text.indexOf(startMarker);
   if (start < 0) throw new Error(`Fixture span start not found: ${startMarker}`);
@@ -75,6 +82,7 @@ export async function loadFixture(id = "noaa-nmfs-2025-0471") {
     agency: metadata.agencies?.at(-1)?.name ?? "Unknown agency",
     publicationDate: metadata.publication_date,
     deadline: metadata.comments_close_on,
+    daysLeftToComment: daysUntilDate(metadata.comments_close_on),
     commentUrl: metadata.regulations_dot_gov_url?.replace(/^http:/, "https:"),
     participationInstructions: addresses.text,
     participationPresentation: presentParticipationInstructions(addresses.text),
