@@ -13,7 +13,7 @@ test("live tool path reads sources, submits claim, then adversarial question", a
     handlers.submit_adversarial_question({ question: "How broadly were these concerns shared?" }); order.push("review");
     return { response: {}, toolCalls: 3 };
   };
-  const result = await generateLiveClaim(validateIntake(SEEDED_EVIDENCE_INTAKE), { runTools, idFactory: () => "C-LIVE-ABC123" });
+  const result = await generateLiveClaim(validateIntake(SEEDED_EVIDENCE_INTAKE), { fixtureSha256: "fixture-hash", runTools, idFactory: () => "C-LIVE-ABC123" });
   assert.deepEqual(order, ["read", "claim", "review"]);
   assert.equal(result.claim.sourceSpan.sourceId, "ORG-01");
   assert.equal(result.claim.adversarialQuestion, "How broadly were these concerns shared?");

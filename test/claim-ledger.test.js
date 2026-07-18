@@ -29,7 +29,7 @@ test("creates a live claim bound to an approved intake span and existing gates",
   const claim = createLiveClaim({
     id: "C-LIVE-ABC123", intake: SEEDED_EVIDENCE_INTAKE,
     submission: { title: "Documented operating concerns", label: "E", en: "Members reported operating concerns.", es: "Los miembros informaron preocupaciones operacionales.", sourceId: "ORG-01" },
-    adversarialQuestion: "Does ORG-01 support a claim beyond the reporting members?"
+    adversarialQuestion: "Does ORG-01 support a claim beyond the reporting members?", fixtureSha256: "fixture-hash"
   });
   assert.equal(claim.sourceSpan.text, SEEDED_EVIDENCE_INTAKE.items[0].sourceSpan.text);
   assert.equal(claim.sourceSpan.end, claim.sourceSpan.text.length);
@@ -39,7 +39,7 @@ test("creates a live claim bound to an approved intake span and existing gates",
 });
 
 test("rejects live claims with model-originated sources or bilingual number drift", () => {
-  const base = { id: "C-LIVE-ABC123", intake: SEEDED_EVIDENCE_INTAKE, adversarialQuestion: "What supports this?" };
+  const base = { id: "C-LIVE-ABC123", intake: SEEDED_EVIDENCE_INTAKE, adversarialQuestion: "What supports this?", fixtureSha256: "fixture-hash" };
   assert.throws(() => createLiveClaim({ ...base, submission: { title: "Bad", label: "E", en: "Claim", es: "Afirmación", sourceId: "MODEL-01" } }), /approved evidence/);
   assert.throws(() => createLiveClaim({ ...base, submission: { title: "Drift", label: "I", en: "Costs rose 10 percent.", es: "Los costos aumentaron.", sourceId: "ORG-01" } }), /dates\/numbers/);
 });
@@ -52,7 +52,25 @@ test("C-02 LIMIT requires and records a real bilingual rewrite", async () => {
   const limited = decideClaim(claim, "LIMIT", SEEDED_LIMIT_REWRITE);
   assert.equal(isRealGroundedDiff(limited), true);
   assert.notEqual(limited.groundedDiff.before.en, limited.groundedDiff.after.en);
+  assert.match(limited.decision.decisionId, /^[0-9a-f-]{36}$/);
+  assert.equal(limited.groundedDiff.decisionId, limited.decision.decisionId);
   assert.equal(evaluateExport(limited).status, "READY FOR HUMAN REVIEW");
+});
+
+test("claim, evidence-set, and fixture changes invalidate approval and grounded diff", async () => {
+  const [, original] = await claims();
+  for (const mutate of [
+    (claim) => { claim.text.en += " Changed."; },
+    (claim) => { claim.approvedSourceIds.push("ORG-02"); },
+    (claim) => { claim.fixtureSha256 = "replacement-fixture-hash"; }
+  ]) {
+    const claim = decideClaim(original, "LIMIT", SEEDED_LIMIT_REWRITE);
+    mutate(claim);
+    assert.equal(evaluateExport(claim).status, "BLOCKED");
+    assert.equal(claim.decision.status, "STALE");
+    assert.equal(claim.groundedDiff.status, "STALE");
+    assert.equal(evaluateExport(claim).gates.approvalCurrent, false);
+  }
 });
 
 test("REJECT produces EXCLUDED and never READY", async () => {

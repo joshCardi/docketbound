@@ -1,3 +1,5 @@
+import { randomUUID } from "node:crypto";
+
 export const CLAIM_LABELS = Object.freeze(["E", "I", "A", "R"]);
 export const HUMAN_DECISIONS = Object.freeze(["ANSWER", "LIMIT", "REJECT", "UNRESOLVED"]);
 export const PACKET_STATUSES = Object.freeze(["BLOCKED", "READY FOR HUMAN REVIEW", "EXCLUDED"]);
@@ -23,15 +25,44 @@ export function isRealGroundedDiff(claim) {
   return before?.en !== after?.en && before?.es !== after?.es;
 }
 
+export function approvalVersion(claim) {
+  return JSON.stringify({
+    text: claim.text,
+    evidenceSourceIds: [...claim.approvedSourceIds].sort(),
+    sourceSpan: { sourceId: claim.sourceSpan?.sourceId, text: claim.sourceSpan?.text },
+    fixtureSha256: claim.fixtureSha256
+  });
+}
+
+export function refreshApprovalState(claim) {
+  if (!claim.decision || claim.decision.status === "STALE") return claim.decision?.status === "STALE";
+  if (claim.decision.boundVersion === approvalVersion(claim)) return false;
+  claim.decision.status = "STALE";
+  if (claim.groundedDiff) claim.groundedDiff.status = "STALE";
+  return true;
+}
+
 export function evaluateExport(claim) {
-  if (claim.humanDecision === "REJECT") {
+  const stale = refreshApprovalState(claim);
+  if (stale) {
+    return {
+      gates: {
+        sourceSpanBound: Boolean(claim.sourceSpan?.sourceId && claim.sourceSpan?.text),
+        noNewCitations: noNewCitations(claim), datesAndNumbersPreserved: datesAndNumbersPreserved(claim),
+        humanDecisionResolved: false, groundedDiffComplete: false, approvalCurrent: false
+      },
+      status: "BLOCKED"
+    };
+  }
+  if (claim.humanDecision === "REJECT" && claim.decision?.status === "CURRENT") {
     return {
       gates: {
         sourceSpanBound: Boolean(claim.sourceSpan?.sourceId && claim.sourceSpan?.text),
         noNewCitations: noNewCitations(claim),
         datesAndNumbersPreserved: datesAndNumbersPreserved(claim),
         humanDecisionResolved: true,
-        groundedDiffComplete: false
+        groundedDiffComplete: false,
+        approvalCurrent: true
       },
       status: "EXCLUDED"
     };
@@ -41,13 +72,14 @@ export function evaluateExport(claim) {
     sourceSpanBound: Boolean(claim.sourceSpan?.sourceId && claim.sourceSpan?.text),
     noNewCitations: noNewCitations(claim),
     datesAndNumbersPreserved: datesAndNumbersPreserved(claim),
-    humanDecisionResolved: ["ANSWER", "LIMIT"].includes(claim.humanDecision),
-    groundedDiffComplete: claim.humanDecision === "ANSWER" || (claim.humanDecision === "LIMIT" && isRealGroundedDiff(claim))
+    humanDecisionResolved: ["ANSWER", "LIMIT"].includes(claim.humanDecision) && claim.decision?.status === "CURRENT",
+    groundedDiffComplete: claim.decision?.status === "CURRENT" && (claim.humanDecision === "ANSWER" || (claim.humanDecision === "LIMIT" && isRealGroundedDiff(claim))),
+    approvalCurrent: claim.humanDecision === "UNRESOLVED" ? false : claim.decision?.status === "CURRENT"
   };
   return { gates, status: Object.values(gates).every(Boolean) ? "READY FOR HUMAN REVIEW" : "BLOCKED" };
 }
 
-function baseClaim({ id, claim, label, text, sourceSpan, approvedSourceIds, adversarialQuestion, evidenceStatus }) {
+function baseClaim({ id, claim, label, text, sourceSpan, approvedSourceIds, adversarialQuestion, evidenceStatus, fixtureSha256 }) {
   return {
     id, claim, label, text, sourceSpan,
     owner: "Demo Fishing Community Organization (fictional)",
@@ -57,7 +89,9 @@ function baseClaim({ id, claim, label, text, sourceSpan, approvedSourceIds, adve
     approvedSourceIds,
     citationSourceIds: [...approvedSourceIds],
     adversarialQuestion,
-    groundedDiff: null
+    groundedDiff: null,
+    decision: null,
+    fixtureSha256
   };
 }
 
@@ -76,7 +110,8 @@ export function buildDemoClaims(fixture, approvedEvidence) {
       sourceSpan: official,
       approvedSourceIds: [official.sourceId],
       adversarialQuestion: "Does the bound Federal Register span support both the reclassification and retention of sector-specific catch limits?",
-      evidenceStatus: "SUPPORTED"
+      evidenceStatus: "SUPPORTED",
+      fixtureSha256: fixture.fixtureSha256
     }),
     baseClaim({
       id: "C-02",
@@ -89,12 +124,13 @@ export function buildDemoClaims(fixture, approvedEvidence) {
       sourceSpan: local.sourceSpan,
       approvedSourceIds: [local.sourceId],
       adversarialQuestion: "What approved evidence supports an island-wide fiscal effect rather than impacts reported by the participating organization's members in three municipalities?",
-      evidenceStatus: "NEEDS EVIDENCE"
+      evidenceStatus: "NEEDS EVIDENCE",
+      fixtureSha256: fixture.fixtureSha256
     })
   ];
 }
 
-export function createLiveClaim({ id, intake, submission, adversarialQuestion }) {
+export function createLiveClaim({ id, intake, submission, adversarialQuestion, fixtureSha256 }) {
   if (!/^C-LIVE-[A-Z0-9]{6}$/.test(id)) throw new Error("Invalid live claim id");
   if (!CLAIM_LABELS.includes(submission?.label)) throw new Error("Invalid E/I/A/R label");
   if (!submission?.title || !submission?.en || !submission?.es) throw new Error("Live claim must be titled and bilingual");
@@ -115,14 +151,15 @@ export function createLiveClaim({ id, intake, submission, adversarialQuestion })
     sourceSpan,
     approvedSourceIds: [evidence.sourceId],
     adversarialQuestion: adversarialQuestion.trim(),
-    evidenceStatus: "SUPPORTED"
+    evidenceStatus: "SUPPORTED",
+    fixtureSha256
   });
   claim.owner = evidence.owner;
   if (!datesAndNumbersPreserved(claim)) throw new Error("Live claim failed bilingual dates/numbers preservation");
   return claim;
 }
 
-export function decideClaim(claim, decision, groundedRewrite = null) {
+export function decideClaim(claim, decision, groundedRewrite = null, { decisionId = randomUUID(), decidedAt = new Date().toISOString() } = {}) {
   if (!HUMAN_DECISIONS.includes(decision)) throw new Error("Invalid human decision");
   const next = { ...claim, humanDecision: decision, groundedDiff: null };
   if (decision === "LIMIT") {
@@ -131,11 +168,14 @@ export function decideClaim(claim, decision, groundedRewrite = null) {
       before: { ...claim.text },
       after: { ...groundedRewrite },
       addedCitationSourceIds: [],
-      positionChangedWithoutApproval: 0
+      positionChangedWithoutApproval: 0,
+      decisionId,
+      status: "CURRENT"
     };
     next.text = next.groundedDiff.after;
     next.evidenceStatus = "SUPPORTED WITHIN LIMITS";
   }
+  next.decision = { decisionId, type: decision, decidedAt, status: "CURRENT", boundVersion: approvalVersion(next) };
   return next;
 }
 

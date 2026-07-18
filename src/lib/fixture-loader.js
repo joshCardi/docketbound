@@ -59,9 +59,10 @@ export async function loadFixture(id = "noaa-nmfs-2025-0471") {
   }
 
   const rawDir = path.join(ROOT, config.rawDir);
-  const [metadataRaw, fullText] = await Promise.all([
+  const [metadataRaw, fullText, sha256Sums] = await Promise.all([
     readFile(path.join(rawDir, config.metadata), "utf8"),
-    readFile(path.join(rawDir, config.fullText), "utf8")
+    readFile(path.join(rawDir, config.fullText), "utf8"),
+    readFile(path.join(rawDir, "SHA256SUMS.txt"), "utf8")
   ]);
   const metadata = JSON.parse(metadataRaw);
   const deadline = exactSpan(fullText, "DATES:", "August 7, 2026.");
@@ -71,6 +72,8 @@ export async function loadFixture(id = "noaa-nmfs-2025-0471") {
     "SUMMARY:",
     "management of other pelagic species."
   );
+  const fixtureSha256 = sha256Sums.split("\n").map((line) => line.trim().split(/\s+/)).find(([, file]) => file === config.fullText)?.[0];
+  if (!fixtureSha256) throw new Error(`Fixture SHA-256 not found for ${config.fullText}`);
 
   return {
     id,
@@ -78,6 +81,7 @@ export async function loadFixture(id = "noaa-nmfs-2025-0471") {
     title: metadata.title,
     type: metadata.type,
     documentNumber: metadata.document_number,
+    fixtureSha256,
     docketId: "NOAA-NMFS-2025-0471",
     agency: metadata.agencies?.at(-1)?.name ?? "Unknown agency",
     publicationDate: metadata.publication_date,

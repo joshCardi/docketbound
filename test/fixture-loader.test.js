@@ -5,6 +5,7 @@ import { daysUntilDate, loadFixture, presentParticipationInstructions } from "..
 test("loads NOAA deadline and participation instructions from frozen raw sources", async () => {
   const fixture = await loadFixture();
   assert.equal(fixture.deadline, "2026-08-07");
+  assert.equal(fixture.fixtureSha256, "1ef25fe46f9b47701c0f4a62fe75952550368e1c687644b63d4cadccb834196f");
   assert.match(fixture.sourceSpans.deadline.text, /August 7, 2026/);
   assert.match(fixture.participationInstructions, /Federal e-Rulemaking Portal/);
   assert.equal(fixture.sourceSpans.addresses.text, fixture.participationInstructions);

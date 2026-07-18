@@ -17,7 +17,7 @@ export function validateIntake(value) {
   return { ...value, organizationPosition: value.organizationPosition.trim(), items };
 }
 
-export async function generateLiveClaim(intake, { runTools = runToolLoop, idFactory = () => `C-LIVE-${randomUUID().replaceAll("-", "").slice(0, 6).toUpperCase()}` } = {}) {
+export async function generateLiveClaim(intake, { fixtureSha256, runTools = runToolLoop, idFactory = () => `C-LIVE-${randomUUID().replaceAll("-", "").slice(0, 6).toUpperCase()}` } = {}) {
   let evidenceRead = false;
   let submission = null;
   let adversarialQuestion = null;
@@ -43,7 +43,7 @@ export async function generateLiveClaim(intake, { runTools = runToolLoop, idFact
   }];
 
   await runTools({
-    instructions: "You are ÁGORA's single claim-generation and adversarial-review loop. First call read_approved_sources. Generate exactly one material bilingual claim aligned with the organization's position and strictly supported by one returned source span. Preserve all dates and numbers across English and Spanish. Select E (evidence), I (inference), A (assertion), or R (recommendation). Call submit_material_claim with the approved source_id; never invent a citation or span. Then call submit_adversarial_question with the one question most capable of breaking that claim. Do not submit prose outside tools.",
+    instructions: "You are DocketBound's single claim-generation and adversarial-review loop. First call read_approved_sources. Generate exactly one material bilingual claim aligned with the organization's position and strictly supported by one returned source span. Preserve all dates and numbers across English and Spanish. Select E (evidence), I (inference), A (assertion), or R (recommendation). Call submit_material_claim with the approved source_id; never invent a citation or span. Then call submit_adversarial_question with the one question most capable of breaking that claim. Do not submit prose outside tools.",
     input: "Generate one new evidence-bound bilingual claim and its adversarial question from the organization's current intake.",
     tools,
     handlers: {
@@ -64,6 +64,6 @@ export async function generateLiveClaim(intake, { runTools = runToolLoop, idFact
     }
   });
   if (!submission || !adversarialQuestion) throw new Error("GPT-5.6 did not complete live claim generation and review");
-  const claim = createLiveClaim({ id: idFactory(), intake, submission, adversarialQuestion });
+  const claim = createLiveClaim({ id: idFactory(), intake, submission, adversarialQuestion, fixtureSha256 });
   return { claim, export: evaluateExport(claim) };
 }

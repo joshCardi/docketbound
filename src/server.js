@@ -8,6 +8,7 @@ import { buildDemoClaims, decideClaim, evaluateExport, isRealGroundedDiff, SEEDE
 import { runToolLoop } from "./lib/openai-client.js";
 import { generateLiveClaim, validateIntake } from "./lib/live-claim.js";
 import { clientIp, createHourlyIpRateLimiter, RATE_LIMIT_MESSAGE } from "./lib/rate-limit.js";
+import { createExportManifest } from "./lib/export-manifest.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 try { loadEnvFile(path.join(ROOT, ".env")); } catch (error) { if (error.code !== "ENOENT") throw error; }
@@ -58,7 +59,7 @@ async function generateLimitedClaim(claim, intake) {
     }
   }];
   await runToolLoop({
-    instructions: "You are ÁGORA's single internal grounded-diff operation. First call read_approved_evidence. Then narrow the challenged claim strictly to what the returned source spans support and call submit_grounded_rewrite. Preserve every date and number across English and Spanish. Introduce no citation, source, fact, or geographic scope beyond tool output. Do not state the rewrite as prose; submit it through the tool.",
+    instructions: "You are DocketBound's single internal grounded-diff operation. First call read_approved_evidence. Then narrow the challenged claim strictly to what the returned source spans support and call submit_grounded_rewrite. Preserve every date and number across English and Spanish. Introduce no citation, source, fact, or geographic scope beyond tool output. Do not state the rewrite as prose; submit it through the tool.",
     input: `LIMIT claim ${claim.id}. Before EN: ${claim.text.en}\nBefore ES: ${claim.text.es}\nReviewer: ${claim.adversarialQuestion}`,
     tools,
     handlers: {
@@ -97,7 +98,14 @@ const server = createServer(async (req, res) => {
     if (req.method === "POST" && url.pathname === "/api/claims/generate") {
       if (!enforceGptRateLimit(req, res)) return;
       const body = await readJson(req);
-      return json(res, 201, await generateLiveClaim(validateIntake(body.intake)));
+      const fixture = await loadFixture();
+      return json(res, 201, await generateLiveClaim(validateIntake(body.intake), { fixtureSha256: fixture.fixtureSha256 }));
+    }
+    if (req.method === "POST" && url.pathname === "/api/export/manifest") {
+      const body = await readJson(req);
+      const fixture = await loadFixture();
+      const intake = validateIntake(body.intake ?? SEEDED_EVIDENCE_INTAKE);
+      return json(res, 200, { manifest: createExportManifest({ fixture, claims: body.claims ?? [], intake }) });
     }
     const limitMatch = req.method === "POST" && url.pathname.match(/^\/api\/claims\/([^/]+)\/limit$/);
     if (limitMatch) {
@@ -109,7 +117,7 @@ const server = createServer(async (req, res) => {
       if (!claim && body.claim?.id === limitMatch[1]) {
         const evidence = intake.items.find((item) => item.sourceId === body.claim.sourceSpan?.sourceId);
         if (!evidence) throw Object.assign(new Error("Claim source is not approved for this intake"), { status: 400 });
-        claim = { ...body.claim, sourceSpan: evidence.sourceSpan, owner: evidence.owner, approvedSourceIds: [evidence.sourceId], citationSourceIds: [evidence.sourceId] };
+        claim = { ...body.claim, fixtureSha256: fixture.fixtureSha256, sourceSpan: evidence.sourceSpan, owner: evidence.owner, approvedSourceIds: [evidence.sourceId], citationSourceIds: [evidence.sourceId] };
       }
       if (!claim) throw Object.assign(new Error("Claim not found"), { status: 404 });
       return json(res, 200, await generateLimitedClaim(claim, intake));
@@ -126,4 +134,4 @@ const server = createServer(async (req, res) => {
   }
 });
 
-server.listen(PORT, HOST, () => console.log(`ÁGORA listening on http://${HOST}:${PORT}`));
+server.listen(PORT, HOST, () => console.log(`DocketBound listening on http://${HOST}:${PORT}`));

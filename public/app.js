@@ -9,16 +9,33 @@ function realDiff(claim) {
   return Boolean(claim.groundedDiff && claim.groundedDiff.before.en !== claim.groundedDiff.after.en && claim.groundedDiff.before.es !== claim.groundedDiff.after.es);
 }
 
+function approvalVersion(claim) {
+  return JSON.stringify({
+    text: claim.text,
+    evidenceSourceIds: [...claim.approvedSourceIds].sort(),
+    sourceSpan: { sourceId: claim.sourceSpan?.sourceId, text: claim.sourceSpan?.text },
+    fixtureSha256: claim.fixtureSha256
+  });
+}
+
+function refreshApproval(claim) {
+  if (!claim.decision || claim.decision.status === "STALE" || claim.decision.boundVersion === approvalVersion(claim)) return;
+  claim.decision.status = "STALE";
+  if (claim.groundedDiff) claim.groundedDiff.status = "STALE";
+}
+
 function evaluate(claim) {
+  refreshApproval(claim);
   const approved = new Set(claim.approvedSourceIds);
   const gates = {
     "Source span bound": Boolean(claim.sourceSpan?.text),
     "No new citations": claim.citationSourceIds.every((id) => approved.has(id)),
     "Dates/numbers preserved": JSON.stringify([...new Set(numberTokens(claim.text.en))].sort()) === JSON.stringify([...new Set(numberTokens(claim.text.es))].sort()),
-    "Human decision resolved": ["ANSWER", "LIMIT", "REJECT"].includes(claim.humanDecision),
-    "Grounded diff complete": claim.humanDecision === "ANSWER" || (claim.humanDecision === "LIMIT" && realDiff(claim))
+    "Human decision resolved": ["ANSWER", "LIMIT", "REJECT"].includes(claim.humanDecision) && claim.decision?.status === "CURRENT",
+    "Grounded diff complete": claim.decision?.status === "CURRENT" && (claim.humanDecision === "ANSWER" || (claim.humanDecision === "LIMIT" && realDiff(claim))),
+    "Approval bound to current version": claim.decision?.status === "CURRENT"
   };
-  if (claim.humanDecision === "REJECT") return { gates: { ...gates, "Grounded diff complete": false }, status: "EXCLUDED" };
+  if (claim.humanDecision === "REJECT" && claim.decision?.status === "CURRENT") return { gates: { ...gates, "Grounded diff complete": false }, status: "EXCLUDED" };
   return { gates, status: Object.values(gates).every(Boolean) ? "READY FOR HUMAN REVIEW" : "BLOCKED" };
 }
 
@@ -62,8 +79,10 @@ async function decide(decision) {
     } catch (error) { alert(`Grounded diff blocked: ${error.message}`); }
     finally { setBusy(false); }
   } else {
-    claim.humanDecision = decision;
-    claim.groundedDiff = null;
+    const next = { ...claim, humanDecision: decision, groundedDiff: null };
+    const decisionId = crypto.randomUUID();
+    next.decision = { decisionId, type: decision, decidedAt: new Date().toISOString(), status: "CURRENT", boundVersion: approvalVersion(next) };
+    Object.assign(claim, next);
   }
   renderClaims();
 }
@@ -88,7 +107,10 @@ function renderIntake() {
     row.querySelector("select").value = item.language;
     row.querySelector('[data-key="sourceText"]').value = item.sourceSpan.text;
     row.querySelectorAll("input,select,textarea").forEach((input) => input.addEventListener("change", () => {
-      if (input.dataset.key === "sourceText") state.intake.items[index].sourceSpan = { ...state.intake.items[index].sourceSpan, start: 0, end: input.value.length, text: input.value };
+      if (input.dataset.key === "sourceText") {
+        state.intake.items[index].sourceSpan = { ...state.intake.items[index].sourceSpan, start: 0, end: input.value.length, text: input.value };
+        state.claims.filter((claim) => claim.sourceSpan.sourceId === item.sourceId).forEach((claim) => { claim.sourceSpan = { ...state.intake.items[index].sourceSpan }; refreshApproval(claim); });
+      }
       else state.intake.items[index][input.dataset.key] = input.value;
       renderPacket();
     }));
@@ -127,7 +149,8 @@ function renderClaims() {
   $("source-text").textContent = claim.sourceSpan.text; $("question").textContent = claim.adversarialQuestion;
   $("decisions").replaceChildren(...DECISIONS.map((d) => Object.assign(document.createElement("button"), { textContent: d, className: d === claim.humanDecision ? "active" : "", onclick: () => decide(d) })));
   const result = evaluate(claim); $("status").textContent = result.status; $("status").className = `status ${result.status === "BLOCKED" ? "blocked" : result.status === "EXCLUDED" ? "excluded" : "ready"}`;
-  $("journey").textContent = result.status === "BLOCKED" ? "Decision unresolved · grounded diff incomplete" : result.status === "EXCLUDED" ? "Rejected by human · removed from participation packet" : "All mechanical gates passed · human review still required";
+  $("journey").textContent = claim.decision?.status === "STALE" ? "Approval STALE · claim or evidence changed · new human decision required" : result.status === "BLOCKED" ? "Decision unresolved · grounded diff incomplete" : result.status === "EXCLUDED" ? "Rejected by human · removed from participation packet" : "All mechanical gates passed · human review still required";
+  $("decision-binding").textContent = claim.decision ? `Decision ${claim.decision.decisionId} · ${claim.decision.status}${claim.groundedDiff ? ` · diff authorized by ${claim.groundedDiff.decisionId} · ${claim.groundedDiff.status}` : ""}` : "No decision bound";
   $("gates").innerHTML = Object.entries(result.gates).map(([name, pass]) => `<div class="gate ${pass ? "pass" : "fail"}"><span>${pass ? "✓" : "×"}</span>${name}</div>`).join("");
   $("diff").hidden = !realDiff(claim);
   if (realDiff(claim)) { $("before").textContent = claim.groundedDiff.before.en; $("after").textContent = claim.groundedDiff.after.en; }
@@ -146,7 +169,7 @@ function renderPacket() {
   $("packet-position-es").textContent = state.intake.organizationPositionEs;
   $("packet-claims").replaceChildren(...results.filter(({ result }) => result.status !== "EXCLUDED").map(({ claim, result }) => {
     const entry = document.createElement("div"); entry.className = `packet-claim ${result.status === "EXCLUDED" ? "packet-excluded" : ""}`;
-    entry.innerHTML = `<div><strong>${claim.id} · ${claim.label}</strong><span>${claim.humanDecision} · ${result.status}</span></div><p class="packet-en"></p><p class="packet-es"></p><small>Source: ${claim.sourceSpan.sourceId} · Owner: ${claim.owner}</small>`;
+    entry.innerHTML = `<div><strong>${claim.id} · ${claim.label}</strong><span>${claim.humanDecision} · ${result.status}</span></div><p class="packet-en"></p><p class="packet-es"></p><small>Source: ${claim.sourceSpan.sourceId} · Owner: ${claim.owner} · Decision: ${claim.decision.decisionId}</small>`;
     entry.querySelector(".packet-en").textContent = claim.text.en; entry.querySelector(".packet-es").textContent = claim.text.es;
     return entry;
   }));
@@ -158,6 +181,22 @@ function renderPacket() {
   const submission = $("packet-submission"); submission.replaceChildren(...state.fixture.participationPresentation.methods.map((method) => {
     const quote = document.createElement("blockquote"); appendLinkedText(quote, method); return quote;
   }));
+  renderManifest();
+}
+
+let manifestRequest = 0;
+async function renderManifest() {
+  const request = ++manifestRequest;
+  $("packet-manifest").textContent = "Generating cryptographic manifest…";
+  $("copy-packet").disabled = true; $("print-packet").disabled = true;
+  try {
+    const response = await fetch("/api/export/manifest", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ claims: state.claims, intake: state.intake }) });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error);
+    if (request !== manifestRequest) return;
+    $("packet-manifest").textContent = JSON.stringify(result.manifest, null, 2);
+    $("copy-packet").disabled = false; $("print-packet").disabled = false;
+  } catch (error) { if (request === manifestRequest) $("packet-manifest").textContent = `Manifest blocked: ${error.message}`; }
 }
 
 function render() {
