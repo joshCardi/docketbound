@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ÁGORA · Deadline-to-Defense</title>
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
@@ -17,16 +18,24 @@
         <div class="deadline"><span>COMMENTS CLOSE</span><strong id="deadline"></strong><a id="comment-link" target="_blank" rel="noreferrer">Official participation portal ↗</a></div>
       </section>
       <details class="panel instructions"><summary>Verified participation instructions <span>source-bound</span></summary><pre id="instructions"></pre></details>
+      <section class="panel intake">
+        <div class="section-head"><div><span class="step">STEP 3</span><h2>Approved evidence intake</h2></div><span id="evidence-count"></span></div>
+        <label>Organization position<textarea id="position" rows="2"></textarea></label>
+        <div id="evidence-items"></div>
+        <button id="add-evidence" class="secondary">+ Add approved evidence</button>
+        <p class="intake-note">Only approved entries become permissible claim sources. Minimum 3 · maximum 6.</p>
+      </section>
+      <nav id="claim-tabs" class="claim-tabs" aria-label="Demo claims"></nav>
       <div class="workspace">
         <section class="panel claim-card">
-          <div class="row"><span class="claim-id" id="claim-id"></span><span class="label" id="claim-label"></span></div>
+          <div class="row"><span class="claim-id" id="claim-id"></span><div><span class="evidence-state" id="evidence-state"></span><span class="label" id="claim-label"></span></div></div>
           <h2>Material bilingual claim</h2><p class="claim en" id="claim-en"></p><p class="claim es" id="claim-es"></p>
           <div class="source"><strong id="source-id"></strong><span id="source-range"></span><blockquote id="source-text"></blockquote></div>
           <div class="challenge"><span>ADVERSARIAL QUESTION</span><p id="question"></p></div>
           <fieldset><legend>Human decision</legend><div id="decisions" class="decisions"></div></fieldset>
         </section>
         <aside class="panel defense">
-          <h2>Defense status</h2><div id="status" class="status blocked"></div><div id="gates"></div>
+          <h2>Defense status</h2><div id="status" class="status blocked"></div><p id="journey" class="journey"></p><div id="gates"></div>
           <div id="diff" hidden><h3>Grounded diff</h3><p class="removed" id="before"></p><p class="added" id="after"></p></div>
           <p class="watermark">DRAFT</p>
         </aside>
