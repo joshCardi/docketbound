@@ -6,17 +6,32 @@ import { loadEnvFile } from "node:process";
 import { loadFixture } from "./lib/fixture-loader.js";
 import { buildDemoClaims, decideClaim, evaluateExport, isRealGroundedDiff, SEEDED_EVIDENCE_INTAKE } from "./lib/claim-ledger.js";
 import { runToolLoop } from "./lib/openai-client.js";
+import { clientIp, createHourlyIpRateLimiter, RATE_LIMIT_MESSAGE } from "./lib/rate-limit.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+try { loadEnvFile(path.join(ROOT, ".env")); } catch (error) { if (error.code !== "ENOENT") throw error; }
 const PUBLIC = path.join(ROOT, "public");
 const PORT = Number(process.env.PORT ?? 3000);
 const HOST = process.env.HOST ?? "127.0.0.1";
 const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "text/javascript; charset=utf-8" };
-try { loadEnvFile(path.join(ROOT, ".env")); } catch (error) { if (error.code !== "ENOENT") throw error; }
+const TRUST_PROXY = process.env.TRUST_PROXY === "1";
+const gptRateLimiter = createHourlyIpRateLimiter({ limit: 10 });
 
 function json(res, status, body) {
   res.writeHead(status, { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" });
   res.end(JSON.stringify(body));
+}
+
+function enforceGptRateLimit(req, res) {
+  const result = gptRateLimiter.check(clientIp(req, TRUST_PROXY));
+  if (result.allowed) return true;
+  res.writeHead(429, {
+    "content-type": "application/json; charset=utf-8",
+    "cache-control": "no-store",
+    "retry-after": String(result.retryAfterSeconds)
+  });
+  res.end(JSON.stringify({ error: RATE_LIMIT_MESSAGE }));
+  return false;
 }
 
 async function readJson(req) {
@@ -79,6 +94,7 @@ const server = createServer(async (req, res) => {
       return json(res, 200, { fixture, intake: SEEDED_EVIDENCE_INTAKE, claims, exports: Object.fromEntries(claims.map((claim) => [claim.id, evaluateExport(claim)])) });
     }
     if (req.method === "POST" && url.pathname === "/api/claims/C-02/limit") {
+      if (!enforceGptRateLimit(req, res)) return;
       const fixture = await loadFixture();
       const body = await readJson(req);
       const intake = body.intake ?? SEEDED_EVIDENCE_INTAKE;
