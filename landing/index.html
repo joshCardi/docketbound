@@ -23,6 +23,7 @@
     .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
     .button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border:1px solid var(--cream);border-radius:3px;color:var(--forest);background:var(--cream);font-size:.8rem;font-weight:800;text-decoration:none;transition:transform .15s ease,background .15s ease}
     .button:hover{transform:translateY(-2px);background:#fff9eb}.button.secondary{color:var(--cream);background:transparent;border-color:var(--line)}.button.secondary:hover{background:#17382c}
+    .sandbox-note{margin:12px 0 0;color:var(--muted);font-size:.7rem}
     .closing{margin:62px 0 0;color:var(--accent);font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.15rem,2vw,1.5rem);font-style:italic}
     footer{display:flex;justify-content:space-between;gap:28px;padding:24px 0 30px;border-top:1px solid var(--line);color:var(--muted);font-size:.68rem;line-height:1.6}
     footer p{max-width:620px;margin:0}footer p:last-child{text-align:right}
@@ -40,9 +41,10 @@
       <p class="one-liner">DocketBound turns an official public proceeding and an organization's approved evidence into a bilingual participation packet — then challenges the weakest claim before a human authorizes any revision.</p>
       <p class="case">Live case: NOAA-NMFS-2025-0471 · Puerto Rico Fishery Management Plan · Comments close 2026-08-07</p>
       <nav class="actions" aria-label="Project links">
-        <a class="button" href="https://github.com/joshCardi/docketbound#local-development">Run it locally — 2-minute setup</a>
+        <a class="button" href="https://docketbound.onrender.com">Launch sandbox</a>
         <a class="button secondary" href="https://github.com/joshCardi/docketbound">View source</a>
       </nav>
+      <p class="sandbox-note">Free-tier sandbox — first load may take ~50 seconds if idle.</p>
       <p class="closing">Evidence can cross language. Authority stays human.</p>
     </main>
     <footer>
