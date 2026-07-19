@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DocketBound turns approved evidence into evidence-bound bilingual public participation packets while keeping authority human.">
+  <meta name="theme-color" content="#0e2a20">
+  <title>DOCKETBOUND · Evidence-Bound Public Participation</title>
+  <style>
+    :root{color-scheme:dark;--forest:#0e2a20;--cream:#f3eddd;--muted:#c6c3b5;--line:#315044;--accent:#d9e7a9}
+    *{box-sizing:border-box}
+    html{background:var(--forest)}
+    body{margin:0;min-height:100svh;background:var(--forest);color:var(--cream);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.01em}
+    .page{width:min(1120px,calc(100% - 40px));min-height:100svh;margin:auto;display:flex;flex-direction:column}
+    header{display:flex;align-items:center;justify-content:space-between;padding:28px 0;border-bottom:1px solid var(--line)}
+    .mark{font-size:.75rem;font-weight:800;letter-spacing:.2em}.header-note{color:var(--muted);font-size:.72rem}
+    main{flex:1;display:grid;align-content:center;padding:72px 0}
+    .eyebrow{margin:0 0 18px;color:var(--accent);font-size:.78rem;font-weight:750;letter-spacing:.16em;text-transform:uppercase}
+    h1{max-width:900px;margin:0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(3.2rem,10vw,8.2rem);font-weight:400;line-height:.86;letter-spacing:-.055em}
+    .descriptor{margin:24px 0 0;color:var(--cream);font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.15rem,2.4vw,1.7rem)}
+    .one-liner{max-width:780px;margin:38px 0 0;color:var(--muted);font-size:clamp(1rem,1.7vw,1.22rem);line-height:1.7}
+    .case{display:inline-flex;width:fit-content;max-width:100%;margin:34px 0 0;padding:11px 15px;border:1px solid var(--line);border-radius:999px;color:var(--cream);font-size:.74rem;line-height:1.4}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border:1px solid var(--cream);border-radius:3px;color:var(--forest);background:var(--cream);font-size:.8rem;font-weight:800;text-decoration:none;transition:transform .15s ease,background .15s ease}
+    .button:hover{transform:translateY(-2px);background:#fff9eb}.button.secondary{color:var(--cream);background:transparent;border-color:var(--line)}.button.secondary:hover{background:#17382c}
+    .closing{margin:62px 0 0;color:var(--accent);font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.15rem,2vw,1.5rem);font-style:italic}
+    footer{display:flex;justify-content:space-between;gap:28px;padding:24px 0 30px;border-top:1px solid var(--line);color:var(--muted);font-size:.68rem;line-height:1.6}
+    footer p{max-width:620px;margin:0}footer p:last-child{text-align:right}
+    @media(max-width:640px){.page{width:min(100% - 28px,1120px)}header{padding:20px 0}.header-note{display:none}main{min-width:0;padding:56px 0 64px}h1{font-size:clamp(2.6rem,13vw,3.2rem);letter-spacing:-.045em}.descriptor{line-height:1.35}.one-liner{margin-top:30px}.case{border-radius:5px}.actions{display:grid}.button{width:100%}.closing{margin-top:48px}footer{flex-direction:column}footer p:last-child{text-align:left}}
+    @media(prefers-reduced-motion:reduce){.button{transition:none}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header><span class="mark">DOCKETBOUND</span><span class="header-note">Deadline-to-Defense</span></header>
+    <main>
+      <p class="eyebrow">Evidence-Bound Public Participation</p>
+      <h1>DOCKETBOUND</h1>
+      <p class="descriptor">Evidence-Bound Public Participation</p>
+      <p class="one-liner">DocketBound turns an official public proceeding and an organization's approved evidence into a bilingual participation packet — then challenges the weakest claim before a human authorizes any revision.</p>
+      <p class="case">Live case: NOAA-NMFS-2025-0471 · Puerto Rico Fishery Management Plan · Comments close 2026-08-07</p>
+      <nav class="actions" aria-label="Project links">
+        <a class="button" href="https://github.com/joshCardi/docketbound#local-development">Run it locally — 2-minute setup</a>
+        <a class="button secondary" href="https://github.com/joshCardi/docketbound">View source</a>
+      </nav>
+      <p class="closing">Evidence can cross language. Authority stays human.</p>
+    </main>
+    <footer>
+      <p>Drafts are not legal advice. Petitioning an agency is not the practice of law. Never auto-submitted.</p>
+      <p>© 2026 Josué R. Cardona Hernández · MIT License · Built for OpenAI Build Week</p>
+    </footer>
+  </div>
+</body>
+</html>
