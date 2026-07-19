@@ -51,6 +51,10 @@ The app intentionally has no frontend build step. It uses a thin Node HTTP backe
 
 The public sandbox limits GPT-backed HTTP operations to 10 calls per client IP in a rolling hour. Set `TRUST_PROXY=1` only when deployment is behind a trusted reverse proxy that supplies `X-Forwarded-For`; local development defaults to `0`.
 
+## Deploy
+
+Deploy the public sandbox in one click from the repository's [`render.yaml` Blueprint](https://render.com/deploy?repo=https://github.com/joshCardi/docketbound).
+
 ## Demo walkthrough
 
 1. Confirm the header identifies NOAA, the proposed rule, the comment deadline, the neutral days-remaining chip, and the official participation portal.

@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: docketbound
+    runtime: node
+    region: virginia
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: HOST
+        value: "0.0.0.0"
+      - key: TRUST_PROXY
+        value: "1"
+      - key: OPENAI_API_KEY
+        sync: false
