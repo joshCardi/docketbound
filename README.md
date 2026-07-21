@@ -1,6 +1,6 @@
 # DOCKETBOUND · Evidence-Bound Public Participation
 
-> **Review draft:** The product owner will personally review and edit this README before submission.
+**Live sandbox:** <https://docketbound.onrender.com> (no credentials; free-tier cold start ~30s) · **Demo video:** <https://youtu.be/6eu8EpS5Sak>
 
 DocketBound helps a citizen or community organization understand a live public proceeding, develop a bilingual participation packet from evidence it has approved, and stress-test the packet's most material claim before a human authorizes any change.
 
@@ -53,7 +53,7 @@ The public sandbox limits GPT-backed HTTP operations to 10 calls per client IP i
 
 ## Deploy
 
-Deploy the public sandbox in one click from the repository's [`render.yaml` Blueprint](https://render.com/deploy?repo=https://github.com/joshCardi/docketbound).
+The public judge sandbox runs at <https://docketbound.onrender.com> (Render free tier; first load may take ~30 seconds; the days-remaining chip is live, so it will show fewer days than the demo video). Deploy your own instance in one click from the repository's [`render.yaml` Blueprint](https://render.com/deploy?repo=https://github.com/joshCardi/docketbound).
 
 ## Demo walkthrough
 
@@ -130,7 +130,7 @@ Roadmap—not part of the frozen demo scope: the **Jurisdictional Impact Map** w
 Dev server:                  npm run dev
 Tests:                       npm test
 GPT-5.6 tool smoke test:     npm run smoke:openai
-Deployment:                  TBD
+Deployment:                  render.yaml Blueprint · live at docketbound.onrender.com
 ```
 
 ## License
